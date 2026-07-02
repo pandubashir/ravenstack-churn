@@ -1,0 +1,21 @@
+{
+  "model": "XGBoost Optimized",
+  "best_params": {
+    "subsample": 1.0,
+    "reg_lambda": 1.5,
+    "reg_alpha": 1.0,
+    "n_estimators": 1200,
+    "min_child_weight": 5,
+    "max_depth": 4,
+    "learning_rate": 0.005,
+    "gamma": 0.1,
+    "colsample_bytree": 0.8
+  },
+  "threshold": 0.32,
+  "metrics": {
+    "recall": 0.6364,
+    "precision": 0.359,
+    "f1": 0.459,
+    "auc_roc": 0.6976
+  }
+}

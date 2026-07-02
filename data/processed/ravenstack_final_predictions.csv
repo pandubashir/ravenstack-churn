@@ -1,0 +1,501 @@
+churn_probability,churn_predicted,risk_category,action,total_mrr,tenure_days,avg_satisfaction_score
+0.8661,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,4498,729,3.5
+0.8524,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,10162,666,4.5
+0.8448,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,18249,73,3.8
+0.8275,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,37312,506,3.0
+0.8255,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,19604,692,0.0
+0.799,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,5624,528,4.5
+0.784,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,16984,54,3.0
+0.7661,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,17315,415,4.5
+0.7614,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,29884,311,4.0
+0.7238,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,32433,614,5.0
+0.7201,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,42999,382,4.0
+0.7197,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,14583,139,3.8
+0.7112,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,29155,704,4.0
+0.71,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,16650,482,3.7142857142857135
+0.7051,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,8721,636,3.6666666666666665
+0.7045,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,30055,681,4.0
+0.6958,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,21770,188,4.0
+0.6945,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,6449,68,0.0
+0.6903,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,13295,680,5.0
+0.6903,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,17111,595,3.333333333333333
+0.6856,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,17040,433,3.5
+0.6839,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,9420,673,4.0
+0.6835,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,7503,407,3.0
+0.6831,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,9514,615,3.0
+0.6771,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,16613,55,4.0
+0.6767,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,3409,606,4.0
+0.6746,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,23942,350,4.0
+0.6737,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,21327,57,3.0
+0.6732,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,27803,175,4.75
+0.6701,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,36445,134,3.333333333333333
+0.6663,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,14152,440,4.0
+0.6656,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,14048,319,4.0
+0.6614,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,13343,437,4.333333333333333
+0.6589,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,20683,562,4.333333333333333
+0.6528,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,21821,188,3.0
+0.6524,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,18132,414,3.6666666666666665
+0.6508,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,44077,376,5.0
+0.6461,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,12015,111,3.6666666666666665
+0.6427,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,48761,66,3.8
+0.6372,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,14293,407,4.0
+0.6312,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,28273,689,5.0
+0.6281,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,12326,438,3.0
+0.626,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,7415,120,0.0
+0.6242,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,5375,271,0.0
+0.6181,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,34136,657,4.0
+0.6157,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,16139,702,4.0
+0.6103,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,34198,58,4.0
+0.6086,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,4812,355,5.0
+0.6077,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,26608,468,4.5
+0.6076,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,15468,508,4.333333333333333
+0.6064,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,14322,263,0.0
+0.6024,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,8353,623,3.0
+0.6012,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,27873,251,0.0
+0.6002,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,12445,190,4.5
+0.5996,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,27994,661,4.0
+0.5978,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,28558,185,5.0
+0.5938,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,34155,587,3.0
+0.5919,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,28328,325,4.0
+0.5859,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,1796,315,0.0
+0.5773,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,9432,237,3.0
+0.5728,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,13028,69,4.0
+0.5719,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,44322,120,4.0
+0.5593,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,16229,545,0.0
+0.5553,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,87957,106,4.0
+0.5539,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,8787,604,3.5
+0.5525,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,37042,675,3.0
+0.5502,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,30471,378,3.75
+0.5469,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,12610,584,4.333333333333333
+0.5439,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,14087,455,4.333333333333333
+0.5371,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,16358,110,3.5
+0.5352,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,8916,176,4.0
+0.5317,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,23057,113,3.6666666666666665
+0.527,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,11756,485,4.2
+0.523,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,28862,604,4.0
+0.5229,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,7586,401,4.333333333333333
+0.5221,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,13728,593,4.0
+0.5219,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,26703,575,4.666666666666667
+0.5208,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,9027,41,4.5
+0.5178,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,3511,601,3.333333333333333
+0.5171,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,19402,496,3.6666666666666665
+0.5153,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,61686,38,4.5
+0.5145,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,25034,575,4.25
+0.5127,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,10004,503,4.0
+0.5118,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,18926,65,3.6666666666666665
+0.5108,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,32956,279,4.5
+0.5086,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,11956,552,3.75
+0.5078,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,17884,438,4.0
+0.5073,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,23800,5,3.8333333333333335
+0.5044,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,6268,686,3.25
+0.5042,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,51680,278,5.0
+0.5035,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,30550,279,5.0
+0.4988,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,23833,542,3.6666666666666665
+0.4983,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,22582,677,0.0
+0.4977,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,75938,226,4.0
+0.4976,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,16351,37,4.0
+0.4942,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,4806,712,4.0
+0.4928,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,34782,550,4.0
+0.4841,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,39516,659,3.0
+0.484,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,11730,575,3.0
+0.4812,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,21567,588,4.0
+0.4812,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,10362,200,5.0
+0.4749,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,10394,635,4.5
+0.4747,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,15478,193,5.0
+0.4719,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,19958,131,3.0
+0.4669,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,2104,379,3.6666666666666665
+0.4581,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,15161,98,3.0
+0.4566,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,17114,481,3.333333333333333
+0.4536,1,🔴 Critical Risk,Eskalasi ke account manager SEGERA,48060,298,3.5
+0.4402,1,🟠 High Risk,Hubungi CS + tawarkan diskon,32270,536,4.0
+0.4399,1,🟠 High Risk,Hubungi CS + tawarkan diskon,21734,475,5.0
+0.4372,1,🟠 High Risk,Hubungi CS + tawarkan diskon,12557,611,3.5
+0.4363,1,🟠 High Risk,Hubungi CS + tawarkan diskon,17524,429,4.0
+0.4323,1,🟠 High Risk,Hubungi CS + tawarkan diskon,16242,628,5.0
+0.4308,1,🟠 High Risk,Hubungi CS + tawarkan diskon,30958,349,4.0
+0.4283,1,🟠 High Risk,Hubungi CS + tawarkan diskon,10692,378,4.333333333333333
+0.4265,1,🟠 High Risk,Hubungi CS + tawarkan diskon,20612,606,3.6666666666666665
+0.4249,1,🟠 High Risk,Hubungi CS + tawarkan diskon,18860,105,4.0
+0.4236,1,🟠 High Risk,Hubungi CS + tawarkan diskon,24907,89,4.0
+0.4196,1,🟠 High Risk,Hubungi CS + tawarkan diskon,11390,411,3.0
+0.417,1,🟠 High Risk,Hubungi CS + tawarkan diskon,5606,25,3.6666666666666665
+0.4113,1,🟠 High Risk,Hubungi CS + tawarkan diskon,28913,108,4.5
+0.4084,1,🟠 High Risk,Hubungi CS + tawarkan diskon,6797,99,4.0
+0.4084,1,🟠 High Risk,Hubungi CS + tawarkan diskon,21450,411,4.333333333333333
+0.4082,1,🟠 High Risk,Hubungi CS + tawarkan diskon,20338,396,3.0
+0.4076,1,🟠 High Risk,Hubungi CS + tawarkan diskon,12548,332,4.0
+0.4075,1,🟠 High Risk,Hubungi CS + tawarkan diskon,13484,439,4.6
+0.403,1,🟠 High Risk,Hubungi CS + tawarkan diskon,18500,216,4.333333333333333
+0.4024,1,🟠 High Risk,Hubungi CS + tawarkan diskon,8504,390,3.0
+0.401,1,🟠 High Risk,Hubungi CS + tawarkan diskon,11825,258,4.333333333333333
+0.3997,1,🟠 High Risk,Hubungi CS + tawarkan diskon,22675,424,4.0
+0.3962,1,🟠 High Risk,Hubungi CS + tawarkan diskon,64653,201,4.6
+0.3906,1,🟠 High Risk,Hubungi CS + tawarkan diskon,17823,524,4.0
+0.3898,1,🟠 High Risk,Hubungi CS + tawarkan diskon,18286,127,4.666666666666667
+0.3884,1,🟠 High Risk,Hubungi CS + tawarkan diskon,18072,504,4.0
+0.3833,1,🟠 High Risk,Hubungi CS + tawarkan diskon,18430,170,3.6666666666666665
+0.377,1,🟠 High Risk,Hubungi CS + tawarkan diskon,30546,372,4.0
+0.3741,1,🟠 High Risk,Hubungi CS + tawarkan diskon,14909,494,3.5
+0.3726,1,🟠 High Risk,Hubungi CS + tawarkan diskon,4335,706,3.5
+0.3704,1,🟠 High Risk,Hubungi CS + tawarkan diskon,31968,407,4.5
+0.3679,1,🟠 High Risk,Hubungi CS + tawarkan diskon,58404,337,4.666666666666667
+0.3663,1,🟠 High Risk,Hubungi CS + tawarkan diskon,15557,81,4.0
+0.3662,1,🟠 High Risk,Hubungi CS + tawarkan diskon,9275,493,0.0
+0.365,1,🟠 High Risk,Hubungi CS + tawarkan diskon,4447,187,3.5
+0.3649,1,🟠 High Risk,Hubungi CS + tawarkan diskon,26514,130,3.25
+0.363,1,🟠 High Risk,Hubungi CS + tawarkan diskon,12569,229,4.5
+0.3617,1,🟠 High Risk,Hubungi CS + tawarkan diskon,13266,27,4.25
+0.3595,1,🟠 High Risk,Hubungi CS + tawarkan diskon,8540,456,3.0
+0.3593,1,🟠 High Risk,Hubungi CS + tawarkan diskon,26626,508,5.0
+0.3593,1,🟠 High Risk,Hubungi CS + tawarkan diskon,33966,610,4.25
+0.3579,1,🟠 High Risk,Hubungi CS + tawarkan diskon,43291,200,4.6
+0.3552,1,🟠 High Risk,Hubungi CS + tawarkan diskon,30719,721,4.333333333333333
+0.3516,1,🟠 High Risk,Hubungi CS + tawarkan diskon,44564,77,4.0
+0.3512,1,🟠 High Risk,Hubungi CS + tawarkan diskon,27557,256,3.5
+0.35,1,🟡 Medium Risk,Kirim email engagement,19597,167,4.333333333333333
+0.347,1,🟡 Medium Risk,Kirim email engagement,30264,255,4.0
+0.3459,1,🟡 Medium Risk,Kirim email engagement,10299,40,0.0
+0.3399,1,🟡 Medium Risk,Kirim email engagement,11197,52,4.4
+0.3393,1,🟡 Medium Risk,Kirim email engagement,18746,285,4.0
+0.3389,1,🟡 Medium Risk,Kirim email engagement,32394,659,4.5
+0.3389,1,🟡 Medium Risk,Kirim email engagement,26276,668,3.25
+0.3373,1,🟡 Medium Risk,Kirim email engagement,13594,25,4.666666666666667
+0.3367,1,🟡 Medium Risk,Kirim email engagement,31390,133,4.0
+0.3366,1,🟡 Medium Risk,Kirim email engagement,60970,449,4.0
+0.3362,1,🟡 Medium Risk,Kirim email engagement,13096,581,4.333333333333333
+0.3341,1,🟡 Medium Risk,Kirim email engagement,3613,89,0.0
+0.3332,1,🟡 Medium Risk,Kirim email engagement,14402,637,4.0
+0.3327,1,🟡 Medium Risk,Kirim email engagement,29071,247,5.0
+0.3318,1,🟡 Medium Risk,Kirim email engagement,9299,409,4.0
+0.3283,1,🟡 Medium Risk,Kirim email engagement,24062,117,4.4
+0.3256,1,🟡 Medium Risk,Kirim email engagement,19725,461,4.0
+0.3246,1,🟡 Medium Risk,Kirim email engagement,19060,226,4.0
+0.3199,0,🟡 Medium Risk,Kirim email engagement,23359,253,4.0
+0.3185,0,🟡 Medium Risk,Kirim email engagement,1560,35,5.0
+0.3164,0,🟡 Medium Risk,Kirim email engagement,43859,670,4.333333333333333
+0.3158,0,🟡 Medium Risk,Kirim email engagement,36041,610,3.5
+0.3129,0,🟡 Medium Risk,Kirim email engagement,12617,137,3.75
+0.3104,0,🟡 Medium Risk,Kirim email engagement,69184,75,3.5
+0.309,0,🟡 Medium Risk,Kirim email engagement,12032,168,3.75
+0.3071,0,🟡 Medium Risk,Kirim email engagement,15381,306,5.0
+0.3043,0,🟡 Medium Risk,Kirim email engagement,10669,48,4.0
+0.3029,0,🟡 Medium Risk,Kirim email engagement,42403,487,5.0
+0.3025,0,🟡 Medium Risk,Kirim email engagement,9171,580,4.5
+0.302,0,🟡 Medium Risk,Kirim email engagement,28320,49,4.0
+0.2962,0,🟡 Medium Risk,Kirim email engagement,28549,23,3.0
+0.2955,0,🟡 Medium Risk,Kirim email engagement,21104,606,3.6666666666666665
+0.295,0,🟡 Medium Risk,Kirim email engagement,12274,77,3.5
+0.2944,0,🟡 Medium Risk,Kirim email engagement,13646,645,4.0
+0.293,0,🟡 Medium Risk,Kirim email engagement,20042,192,4.0
+0.2921,0,🟡 Medium Risk,Kirim email engagement,29085,534,4.333333333333333
+0.2916,0,🟡 Medium Risk,Kirim email engagement,14646,664,3.6
+0.2914,0,🟡 Medium Risk,Kirim email engagement,32477,196,5.0
+0.2906,0,🟡 Medium Risk,Kirim email engagement,31416,83,3.5
+0.2895,0,🟡 Medium Risk,Kirim email engagement,16633,299,3.8
+0.2887,0,🟡 Medium Risk,Kirim email engagement,21541,345,4.0
+0.2878,0,🟡 Medium Risk,Kirim email engagement,34140,144,4.0
+0.284,0,🟡 Medium Risk,Kirim email engagement,11858,497,3.5
+0.2839,0,🟡 Medium Risk,Kirim email engagement,31108,607,3.5
+0.2831,0,🟡 Medium Risk,Kirim email engagement,26256,281,3.0
+0.2821,0,🟡 Medium Risk,Kirim email engagement,23990,584,4.0
+0.2816,0,🟡 Medium Risk,Kirim email engagement,13532,315,5.0
+0.2805,0,🟡 Medium Risk,Kirim email engagement,14121,474,0.0
+0.2798,0,🟡 Medium Risk,Kirim email engagement,27966,34,3.5
+0.2796,0,🟡 Medium Risk,Kirim email engagement,11332,439,4.0
+0.2781,0,🟡 Medium Risk,Kirim email engagement,5175,157,4.0
+0.2776,0,🟡 Medium Risk,Kirim email engagement,10575,579,0.0
+0.2775,0,🟡 Medium Risk,Kirim email engagement,30524,279,3.6
+0.2766,0,🟡 Medium Risk,Kirim email engagement,28788,688,5.0
+0.2764,0,🟡 Medium Risk,Kirim email engagement,15717,251,4.0
+0.276,0,🟡 Medium Risk,Kirim email engagement,19790,226,5.0
+0.2754,0,🟡 Medium Risk,Kirim email engagement,29320,390,5.0
+0.2713,0,🟡 Medium Risk,Kirim email engagement,64400,280,3.75
+0.27,0,🟡 Medium Risk,Kirim email engagement,26234,240,4.0
+0.2693,0,🟡 Medium Risk,Kirim email engagement,27506,419,3.0
+0.2689,0,🟡 Medium Risk,Kirim email engagement,8058,76,4.2
+0.2689,0,🟡 Medium Risk,Kirim email engagement,18147,107,5.0
+0.2676,0,🟡 Medium Risk,Kirim email engagement,23919,71,4.333333333333333
+0.2659,0,🟡 Medium Risk,Kirim email engagement,14708,313,5.0
+0.2649,0,🟡 Medium Risk,Kirim email engagement,3551,101,4.333333333333333
+0.2646,0,🟡 Medium Risk,Kirim email engagement,22673,609,3.5
+0.2645,0,🟡 Medium Risk,Kirim email engagement,17289,149,4.0
+0.2644,0,🟡 Medium Risk,Kirim email engagement,41641,241,3.6666666666666665
+0.2626,0,🟡 Medium Risk,Kirim email engagement,10963,213,5.0
+0.2593,0,🟡 Medium Risk,Kirim email engagement,34392,342,5.0
+0.2592,0,🟡 Medium Risk,Kirim email engagement,29433,156,3.75
+0.2565,0,🟡 Medium Risk,Kirim email engagement,20497,51,4.0
+0.2556,0,🟡 Medium Risk,Kirim email engagement,61935,167,3.0
+0.2538,0,🟡 Medium Risk,Kirim email engagement,19435,705,4.5
+0.2537,0,🟡 Medium Risk,Kirim email engagement,12747,371,3.8
+0.2526,0,🟡 Medium Risk,Kirim email engagement,5384,556,3.5
+0.2517,0,🟡 Medium Risk,Kirim email engagement,52204,56,4.666666666666667
+0.2516,0,🟡 Medium Risk,Kirim email engagement,8522,357,4.25
+0.2506,0,🟡 Medium Risk,Kirim email engagement,26183,75,4.0
+0.2503,0,🟡 Medium Risk,Kirim email engagement,11392,600,4.25
+0.2497,0,🟢 Low Risk,Monitor rutin,69230,486,5.0
+0.246,0,🟢 Low Risk,Monitor rutin,7693,478,4.0
+0.2453,0,🟢 Low Risk,Monitor rutin,8436,339,3.0
+0.2433,0,🟢 Low Risk,Monitor rutin,38191,399,4.666666666666667
+0.2431,0,🟢 Low Risk,Monitor rutin,17493,529,0.0
+0.2425,0,🟢 Low Risk,Monitor rutin,22959,445,3.6666666666666665
+0.2406,0,🟢 Low Risk,Monitor rutin,20604,680,4.5
+0.2406,0,🟢 Low Risk,Monitor rutin,35868,217,4.0
+0.2388,0,🟢 Low Risk,Monitor rutin,15342,475,3.333333333333333
+0.2364,0,🟢 Low Risk,Monitor rutin,26410,636,4.0
+0.2357,0,🟢 Low Risk,Monitor rutin,10252,134,4.0
+0.2356,0,🟢 Low Risk,Monitor rutin,133298,473,4.5
+0.2355,0,🟢 Low Risk,Monitor rutin,45872,507,3.5
+0.2336,0,🟢 Low Risk,Monitor rutin,18656,236,5.0
+0.2335,0,🟢 Low Risk,Monitor rutin,11567,617,3.0
+0.2326,0,🟢 Low Risk,Monitor rutin,52089,405,4.333333333333333
+0.2323,0,🟢 Low Risk,Monitor rutin,43521,324,4.333333333333333
+0.2311,0,🟢 Low Risk,Monitor rutin,1989,420,3.75
+0.2295,0,🟢 Low Risk,Monitor rutin,21075,406,3.6666666666666665
+0.2293,0,🟢 Low Risk,Monitor rutin,9251,53,5.0
+0.2286,0,🟢 Low Risk,Monitor rutin,8344,647,3.5
+0.2283,0,🟢 Low Risk,Monitor rutin,22642,215,4.0
+0.2276,0,🟢 Low Risk,Monitor rutin,20475,62,3.6666666666666665
+0.2273,0,🟢 Low Risk,Monitor rutin,20915,217,3.0
+0.2205,0,🟢 Low Risk,Monitor rutin,13325,470,4.5
+0.2203,0,🟢 Low Risk,Monitor rutin,19940,212,4.5
+0.22,0,🟢 Low Risk,Monitor rutin,15217,283,4.2
+0.2199,0,🟢 Low Risk,Monitor rutin,6252,88,3.0
+0.2184,0,🟢 Low Risk,Monitor rutin,21894,703,0.0
+0.2179,0,🟢 Low Risk,Monitor rutin,16307,57,3.0
+0.2141,0,🟢 Low Risk,Monitor rutin,15802,304,3.5
+0.2128,0,🟢 Low Risk,Monitor rutin,2326,65,5.0
+0.2125,0,🟢 Low Risk,Monitor rutin,11003,7,3.6
+0.2118,0,🟢 Low Risk,Monitor rutin,18807,181,4.0
+0.2114,0,🟢 Low Risk,Monitor rutin,12567,372,4.142857142857143
+0.2109,0,🟢 Low Risk,Monitor rutin,6460,729,0.0
+0.2107,0,🟢 Low Risk,Monitor rutin,19088,299,3.0
+0.2107,0,🟢 Low Risk,Monitor rutin,30744,446,3.0
+0.2103,0,🟢 Low Risk,Monitor rutin,19250,397,4.0
+0.2099,0,🟢 Low Risk,Monitor rutin,26230,270,4.0
+0.2079,0,🟢 Low Risk,Monitor rutin,4861,112,0.0
+0.2073,0,🟢 Low Risk,Monitor rutin,3222,645,3.0
+0.2063,0,🟢 Low Risk,Monitor rutin,18315,119,3.6666666666666665
+0.2061,0,🟢 Low Risk,Monitor rutin,36755,59,0.0
+0.2056,0,🟢 Low Risk,Monitor rutin,32574,361,3.5
+0.2053,0,🟢 Low Risk,Monitor rutin,7452,340,4.142857142857143
+0.205,0,🟢 Low Risk,Monitor rutin,23905,629,3.333333333333333
+0.2031,0,🟢 Low Risk,Monitor rutin,25813,695,0.0
+0.2028,0,🟢 Low Risk,Monitor rutin,4070,224,3.0
+0.2027,0,🟢 Low Risk,Monitor rutin,25790,513,4.0
+0.2027,0,🟢 Low Risk,Monitor rutin,18190,674,3.5
+0.2026,0,🟢 Low Risk,Monitor rutin,18909,600,3.0
+0.2017,0,🟢 Low Risk,Monitor rutin,27746,481,4.0
+0.2017,0,🟢 Low Risk,Monitor rutin,44601,248,4.0
+0.2012,0,🟢 Low Risk,Monitor rutin,16896,670,3.0
+0.2011,0,🟢 Low Risk,Monitor rutin,8771,66,4.0
+0.2004,0,🟢 Low Risk,Monitor rutin,71020,102,4.0
+0.1999,0,🟢 Low Risk,Monitor rutin,43247,54,5.0
+0.1996,0,🟢 Low Risk,Monitor rutin,11791,295,4.0
+0.1988,0,🟢 Low Risk,Monitor rutin,18926,10,4.0
+0.1978,0,🟢 Low Risk,Monitor rutin,14759,25,4.8
+0.1973,0,🟢 Low Risk,Monitor rutin,23676,477,4.0
+0.1973,0,🟢 Low Risk,Monitor rutin,48726,464,4.0
+0.1946,0,🟢 Low Risk,Monitor rutin,12125,400,5.0
+0.1943,0,🟢 Low Risk,Monitor rutin,28418,143,4.0
+0.1942,0,🟢 Low Risk,Monitor rutin,3112,130,4.0
+0.1942,0,🟢 Low Risk,Monitor rutin,12060,685,4.333333333333333
+0.1941,0,🟢 Low Risk,Monitor rutin,3498,97,3.75
+0.1938,0,🟢 Low Risk,Monitor rutin,37847,608,4.0
+0.1938,0,🟢 Low Risk,Monitor rutin,14279,300,4.0
+0.1913,0,🟢 Low Risk,Monitor rutin,21400,570,4.0
+0.1911,0,🟢 Low Risk,Monitor rutin,21666,156,4.0
+0.1908,0,🟢 Low Risk,Monitor rutin,44815,165,3.75
+0.1907,0,🟢 Low Risk,Monitor rutin,27765,37,3.0
+0.1905,0,🟢 Low Risk,Monitor rutin,12137,377,5.0
+0.1898,0,🟢 Low Risk,Monitor rutin,14250,705,3.5
+0.1895,0,🟢 Low Risk,Monitor rutin,24274,333,5.0
+0.1884,0,🟢 Low Risk,Monitor rutin,1178,78,4.2
+0.1881,0,🟢 Low Risk,Monitor rutin,7507,306,4.333333333333333
+0.1877,0,🟢 Low Risk,Monitor rutin,10636,651,3.0
+0.1875,0,🟢 Low Risk,Monitor rutin,11844,262,4.666666666666667
+0.1874,0,🟢 Low Risk,Monitor rutin,15979,596,3.6666666666666665
+0.1854,0,🟢 Low Risk,Monitor rutin,15470,71,4.0
+0.1844,0,🟢 Low Risk,Monitor rutin,9036,469,3.5
+0.1839,0,🟢 Low Risk,Monitor rutin,20088,639,4.0
+0.1838,0,🟢 Low Risk,Monitor rutin,15600,199,3.5
+0.1833,0,🟢 Low Risk,Monitor rutin,12422,117,5.0
+0.1824,0,🟢 Low Risk,Monitor rutin,22881,230,0.0
+0.182,0,🟢 Low Risk,Monitor rutin,38210,311,4.333333333333333
+0.1795,0,🟢 Low Risk,Monitor rutin,83886,179,3.0
+0.1789,0,🟢 Low Risk,Monitor rutin,12116,122,4.5
+0.1784,0,🟢 Low Risk,Monitor rutin,17831,473,3.0
+0.1776,0,🟢 Low Risk,Monitor rutin,3393,94,3.0
+0.1772,0,🟢 Low Risk,Monitor rutin,30426,239,3.333333333333333
+0.1771,0,🟢 Low Risk,Monitor rutin,15072,201,4.0
+0.177,0,🟢 Low Risk,Monitor rutin,24494,218,3.0
+0.177,0,🟢 Low Risk,Monitor rutin,11194,423,4.0
+0.1766,0,🟢 Low Risk,Monitor rutin,190,173,4.25
+0.1761,0,🟢 Low Risk,Monitor rutin,20989,513,3.5
+0.1752,0,🟢 Low Risk,Monitor rutin,53976,28,5.0
+0.1723,0,🟢 Low Risk,Monitor rutin,16516,154,4.0
+0.172,0,🟢 Low Risk,Monitor rutin,41116,410,4.0
+0.1717,0,🟢 Low Risk,Monitor rutin,50817,128,0.0
+0.1708,0,🟢 Low Risk,Monitor rutin,22933,547,4.333333333333333
+0.1708,0,🟢 Low Risk,Monitor rutin,19465,179,3.5
+0.1707,0,🟢 Low Risk,Monitor rutin,24398,291,4.0
+0.1706,0,🟢 Low Risk,Monitor rutin,6776,422,0.0
+0.1692,0,🟢 Low Risk,Monitor rutin,33506,414,4.0
+0.1689,0,🟢 Low Risk,Monitor rutin,138060,75,4.0
+0.1683,0,🟢 Low Risk,Monitor rutin,17263,173,4.0
+0.1678,0,🟢 Low Risk,Monitor rutin,27661,702,3.4
+0.1677,0,🟢 Low Risk,Monitor rutin,22770,508,4.333333333333333
+0.1672,0,🟢 Low Risk,Monitor rutin,40713,228,0.0
+0.1669,0,🟢 Low Risk,Monitor rutin,16731,240,4.0
+0.1666,0,🟢 Low Risk,Monitor rutin,13048,627,0.0
+0.1659,0,🟢 Low Risk,Monitor rutin,31989,278,5.0
+0.1656,0,🟢 Low Risk,Monitor rutin,12244,269,4.333333333333333
+0.1653,0,🟢 Low Risk,Monitor rutin,20293,500,0.0
+0.1646,0,🟢 Low Risk,Monitor rutin,16875,62,4.666666666666667
+0.1634,0,🟢 Low Risk,Monitor rutin,7513,128,3.5
+0.1627,0,🟢 Low Risk,Monitor rutin,42096,431,4.0
+0.1626,0,🟢 Low Risk,Monitor rutin,14327,183,4.25
+0.1605,0,🟢 Low Risk,Monitor rutin,11852,272,3.0
+0.1601,0,🟢 Low Risk,Monitor rutin,68489,603,3.6666666666666665
+0.1568,0,🟢 Low Risk,Monitor rutin,2622,639,3.5
+0.1566,0,🟢 Low Risk,Monitor rutin,22423,47,4.2
+0.1563,0,🟢 Low Risk,Monitor rutin,14638,300,3.0
+0.1562,0,🟢 Low Risk,Monitor rutin,11069,462,3.5
+0.1561,0,🟢 Low Risk,Monitor rutin,18492,244,4.0
+0.1555,0,🟢 Low Risk,Monitor rutin,43633,251,3.2
+0.1537,0,🟢 Low Risk,Monitor rutin,13107,313,5.0
+0.1532,0,🟢 Low Risk,Monitor rutin,33122,125,4.5
+0.1531,0,🟢 Low Risk,Monitor rutin,70980,154,5.0
+0.1531,0,🟢 Low Risk,Monitor rutin,31709,107,3.5
+0.1527,0,🟢 Low Risk,Monitor rutin,20664,50,4.0
+0.1525,0,🟢 Low Risk,Monitor rutin,3565,129,4.333333333333333
+0.1519,0,🟢 Low Risk,Monitor rutin,32571,98,5.0
+0.1516,0,🟢 Low Risk,Monitor rutin,70000,112,3.75
+0.1508,0,🟢 Low Risk,Monitor rutin,12390,203,4.2
+0.1498,0,🟢 Low Risk,Monitor rutin,15181,159,4.0
+0.1488,0,🟢 Low Risk,Monitor rutin,22379,422,3.6666666666666665
+0.1484,0,🟢 Low Risk,Monitor rutin,16520,22,3.0
+0.1477,0,🟢 Low Risk,Monitor rutin,10659,649,0.0
+0.1465,0,🟢 Low Risk,Monitor rutin,10063,261,4.333333333333333
+0.1465,0,🟢 Low Risk,Monitor rutin,16168,570,5.0
+0.1463,0,🟢 Low Risk,Monitor rutin,39201,262,3.5
+0.146,0,🟢 Low Risk,Monitor rutin,12030,661,3.5
+0.1456,0,🟢 Low Risk,Monitor rutin,16810,447,3.0
+0.1456,0,🟢 Low Risk,Monitor rutin,8775,150,0.0
+0.1455,0,🟢 Low Risk,Monitor rutin,21324,134,4.0
+0.1443,0,🟢 Low Risk,Monitor rutin,19006,413,5.0
+0.1437,0,🟢 Low Risk,Monitor rutin,24489,109,4.0
+0.1435,0,🟢 Low Risk,Monitor rutin,7451,18,5.0
+0.1434,0,🟢 Low Risk,Monitor rutin,30376,376,3.6666666666666665
+0.1415,0,🟢 Low Risk,Monitor rutin,22290,55,4.0
+0.1415,0,🟢 Low Risk,Monitor rutin,4544,481,5.0
+0.1412,0,🟢 Low Risk,Monitor rutin,36112,705,3.0
+0.14,0,🟢 Low Risk,Monitor rutin,34589,401,4.0
+0.1398,0,🟢 Low Risk,Monitor rutin,20039,209,4.5
+0.1387,0,🟢 Low Risk,Monitor rutin,3831,61,4.166666666666667
+0.1384,0,🟢 Low Risk,Monitor rutin,14118,341,3.0
+0.1379,0,🟢 Low Risk,Monitor rutin,28701,393,4.5
+0.1378,0,🟢 Low Risk,Monitor rutin,10236,91,4.0
+0.1372,0,🟢 Low Risk,Monitor rutin,38975,164,3.5
+0.1369,0,🟢 Low Risk,Monitor rutin,66010,371,3.0
+0.1366,0,🟢 Low Risk,Monitor rutin,456,234,4.6
+0.1354,0,🟢 Low Risk,Monitor rutin,36420,60,0.0
+0.1351,0,🟢 Low Risk,Monitor rutin,28081,730,4.0
+0.1338,0,🟢 Low Risk,Monitor rutin,17260,617,4.0
+0.1336,0,🟢 Low Risk,Monitor rutin,11893,121,3.0
+0.1324,0,🟢 Low Risk,Monitor rutin,29687,241,4.333333333333333
+0.1323,0,🟢 Low Risk,Monitor rutin,23049,709,4.0
+0.1322,0,🟢 Low Risk,Monitor rutin,21022,470,3.0
+0.132,0,🟢 Low Risk,Monitor rutin,7797,672,4.0
+0.131,0,🟢 Low Risk,Monitor rutin,94710,366,3.5
+0.1309,0,🟢 Low Risk,Monitor rutin,11567,453,4.0
+0.1306,0,🟢 Low Risk,Monitor rutin,10381,204,4.5
+0.1295,0,🟢 Low Risk,Monitor rutin,30688,597,3.0
+0.1292,0,🟢 Low Risk,Monitor rutin,18559,452,4.0
+0.129,0,🟢 Low Risk,Monitor rutin,21930,638,4.0
+0.1266,0,🟢 Low Risk,Monitor rutin,48647,477,3.2
+0.126,0,🟢 Low Risk,Monitor rutin,3389,305,4.0
+0.1258,0,🟢 Low Risk,Monitor rutin,18168,285,4.666666666666667
+0.1256,0,🟢 Low Risk,Monitor rutin,24084,235,4.0
+0.1251,0,🟢 Low Risk,Monitor rutin,12671,204,4.4
+0.1227,0,🟢 Low Risk,Monitor rutin,17931,66,4.0
+0.1227,0,🟢 Low Risk,Monitor rutin,51109,608,4.0
+0.1224,0,🟢 Low Risk,Monitor rutin,2332,149,3.0
+0.1224,0,🟢 Low Risk,Monitor rutin,78588,14,3.8
+0.121,0,🟢 Low Risk,Monitor rutin,16122,285,4.666666666666667
+0.1204,0,🟢 Low Risk,Monitor rutin,12765,175,3.5
+0.1199,0,🟢 Low Risk,Monitor rutin,12603,77,3.0
+0.1195,0,🟢 Low Risk,Monitor rutin,48456,580,3.5
+0.1192,0,🟢 Low Risk,Monitor rutin,14373,607,3.0
+0.1184,0,🟢 Low Risk,Monitor rutin,28379,430,4.0
+0.1184,0,🟢 Low Risk,Monitor rutin,25928,176,4.333333333333333
+0.1178,0,🟢 Low Risk,Monitor rutin,23432,352,4.0
+0.1173,0,🟢 Low Risk,Monitor rutin,30385,38,4.2
+0.1167,0,🟢 Low Risk,Monitor rutin,13081,651,4.25
+0.1167,0,🟢 Low Risk,Monitor rutin,16592,680,0.0
+0.1162,0,🟢 Low Risk,Monitor rutin,36162,715,4.0
+0.1139,0,🟢 Low Risk,Monitor rutin,8216,528,3.6666666666666665
+0.1132,0,🟢 Low Risk,Monitor rutin,2919,675,4.8
+0.113,0,🟢 Low Risk,Monitor rutin,21160,206,4.0
+0.1128,0,🟢 Low Risk,Monitor rutin,23324,395,3.6666666666666665
+0.1116,0,🟢 Low Risk,Monitor rutin,9332,537,0.0
+0.1111,0,🟢 Low Risk,Monitor rutin,8889,248,0.0
+0.1096,0,🟢 Low Risk,Monitor rutin,46666,649,4.0
+0.1081,0,🟢 Low Risk,Monitor rutin,20964,265,3.0
+0.1061,0,🟢 Low Risk,Monitor rutin,42404,360,4.0
+0.1059,0,🟢 Low Risk,Monitor rutin,29407,32,3.0
+0.1037,0,🟢 Low Risk,Monitor rutin,28120,321,4.0
+0.1035,0,🟢 Low Risk,Monitor rutin,4910,523,4.666666666666667
+0.1031,0,🟢 Low Risk,Monitor rutin,54605,267,3.0
+0.1013,0,🟢 Low Risk,Monitor rutin,25079,394,4.25
+0.101,0,🟢 Low Risk,Monitor rutin,130152,362,4.0
+0.0996,0,🟢 Low Risk,Monitor rutin,52160,62,3.0
+0.0988,0,🟢 Low Risk,Monitor rutin,9773,425,4.25
+0.0986,0,🟢 Low Risk,Monitor rutin,39120,277,3.0
+0.0978,0,🟢 Low Risk,Monitor rutin,24138,357,4.0
+0.0968,0,🟢 Low Risk,Monitor rutin,21237,698,4.25
+0.0964,0,🟢 Low Risk,Monitor rutin,23905,91,3.2
+0.0952,0,🟢 Low Risk,Monitor rutin,20131,191,4.0
+0.0949,0,🟢 Low Risk,Monitor rutin,28518,248,3.0
+0.0939,0,🟢 Low Risk,Monitor rutin,41267,154,3.5
+0.0932,0,🟢 Low Risk,Monitor rutin,4818,32,4.333333333333333
+0.0924,0,🟢 Low Risk,Monitor rutin,15081,45,4.0
+0.0913,0,🟢 Low Risk,Monitor rutin,14751,561,4.2
+0.0902,0,🟢 Low Risk,Monitor rutin,35519,45,3.5
+0.0886,0,🟢 Low Risk,Monitor rutin,33491,2,4.0
+0.0865,0,🟢 Low Risk,Monitor rutin,36456,516,4.5
+0.0862,0,🟢 Low Risk,Monitor rutin,444,392,3.6666666666666665
+0.0859,0,🟢 Low Risk,Monitor rutin,35836,27,4.25
+0.0816,0,🟢 Low Risk,Monitor rutin,4194,290,4.25
+0.0803,0,🟢 Low Risk,Monitor rutin,39614,71,4.0
+0.0795,0,🟢 Low Risk,Monitor rutin,9669,6,4.5
+0.0794,0,🟢 Low Risk,Monitor rutin,3594,182,4.5
+0.0783,0,🟢 Low Risk,Monitor rutin,28130,272,3.5
+0.0765,0,🟢 Low Risk,Monitor rutin,16577,313,3.75
+0.0762,0,🟢 Low Risk,Monitor rutin,8947,24,4.5
+0.0756,0,🟢 Low Risk,Monitor rutin,10312,146,3.0
+0.075,0,🟢 Low Risk,Monitor rutin,34538,178,4.0
+0.0749,0,🟢 Low Risk,Monitor rutin,46912,514,4.4
+0.0747,0,🟢 Low Risk,Monitor rutin,26705,652,4.0
+0.0746,0,🟢 Low Risk,Monitor rutin,5771,66,3.6666666666666665
+0.0744,0,🟢 Low Risk,Monitor rutin,11087,420,5.0
+0.073,0,🟢 Low Risk,Monitor rutin,9552,1,4.333333333333333
+0.0726,0,🟢 Low Risk,Monitor rutin,26608,149,3.5
+0.0716,0,🟢 Low Risk,Monitor rutin,7072,708,3.333333333333333
+0.0715,0,🟢 Low Risk,Monitor rutin,2523,722,4.0
+0.071,0,🟢 Low Risk,Monitor rutin,35424,71,4.0
+0.0709,0,🟢 Low Risk,Monitor rutin,23718,429,4.5
+0.0684,0,🟢 Low Risk,Monitor rutin,13310,373,3.0
+0.0667,0,🟢 Low Risk,Monitor rutin,1695,291,4.5
+0.0659,0,🟢 Low Risk,Monitor rutin,6025,685,4.0
+0.0649,0,🟢 Low Risk,Monitor rutin,40525,291,3.75
+0.0641,0,🟢 Low Risk,Monitor rutin,41630,648,4.0
+0.0634,0,🟢 Low Risk,Monitor rutin,12312,46,4.0
+0.0631,0,🟢 Low Risk,Monitor rutin,19382,520,3.75
+0.0612,0,🟢 Low Risk,Monitor rutin,10945,179,0.0
+0.0602,0,🟢 Low Risk,Monitor rutin,19379,532,4.0
+0.0582,0,🟢 Low Risk,Monitor rutin,15960,52,3.5
+0.0575,0,🟢 Low Risk,Monitor rutin,6321,428,0.0
+0.0567,0,🟢 Low Risk,Monitor rutin,11902,693,4.0
+0.055,0,🟢 Low Risk,Monitor rutin,5142,577,5.0
+0.05,0,🟢 Low Risk,Monitor rutin,9640,288,4.0
+0.0306,0,🟢 Low Risk,Monitor rutin,24076,466,5.0

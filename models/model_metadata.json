@@ -1,0 +1,41 @@
+{
+  "best_model": "Random Forest",
+  "best_params": {
+    "max_depth": 6,
+    "min_samples_split": 2,
+    "n_estimators": 200
+  },
+  "threshold": 0.37000000000000005,
+  "metrics_final": {
+    "recall": 0.8182,
+    "precision": 0.3,
+    "f1": 0.439,
+    "auc_roc": 0.6597
+  },
+  "all_models_comparison": {
+    "Recall": {
+      "Logistic Regression": 0.8182,
+      "Decision Tree": 0.0,
+      "Random Forest": 0.8182,
+      "XGBoost": 0.0
+    },
+    "Precision": {
+      "Logistic Regression": 0.2727,
+      "Decision Tree": 0.0,
+      "Random Forest": 0.2903,
+      "XGBoost": 0.0
+    },
+    "F1": {
+      "Logistic Regression": 0.4091,
+      "Decision Tree": 0.0,
+      "Random Forest": 0.4286,
+      "XGBoost": 0.0
+    },
+    "AUC-ROC": {
+      "Logistic Regression": 0.6416,
+      "Decision Tree": 0.5315,
+      "Random Forest": 0.6672,
+      "XGBoost": 0.6416
+    }
+  }
+}
