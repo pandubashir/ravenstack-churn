@@ -22,7 +22,7 @@ st.set_page_config(
 # ============================================================
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Montserrat:ital,wght@1,600&display=swap');
 
 :root {
     --bg          : #07080f;
@@ -66,6 +66,7 @@ html, body, [data-testid="stAppViewContainer"] {
 
 [data-testid="stHeader"]    { background: transparent !important; }
 [data-testid="stSidebar"]   { display:none; }
+[data-testid="stToolbar"] { display: none !important; }
 .block-container { padding: 1.75rem 2.5rem !important; max-width:1380px; }
 h1,h2,h3,h4 { font-family:'Space Grotesk',sans-serif; }
 hr { border:none!important; border-top:1px solid var(--border)!important; margin:1.75rem 0!important; }
@@ -94,11 +95,17 @@ hr { border:none!important; border-top:1px solid var(--border)!important; margin
 /* ── HERO ── */
 .hero { text-align:center; padding:2.5rem 1rem 1.5rem; }
 .hero-eyebrow {
-    display:inline-flex; align-items:center; gap:.5rem;
-    background:rgba(99,102,241,.12); border:1px solid rgba(99,102,241,.25);
-    border-radius:100px; padding:.3rem .9rem;
-    font-size:.72rem; color:var(--indigo-lt);
-    letter-spacing:.1em; text-transform:uppercase; margin-bottom:1.2rem;
+    ...
+    font-size: .85rem;        /* ← ubah dari .72rem */
+    padding: .4rem 1.1rem;   /* ← ubah dari .3rem .9rem */
+}
+.hero-eyebrow {
+    ...
+    background: rgba(99,102,241,.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(99,102,241,.25);
+    box-shadow: 0 4px 15px rgba(99,102,241,.1), inset 0 1px 0 rgba(255,255,255,.08);
 }
 .hero-title {
     font-family:'Space Grotesk',sans-serif;
@@ -107,8 +114,18 @@ hr { border:none!important; border-top:1px solid var(--border)!important; margin
     -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     background-clip:text; margin:0 0 .9rem;
 }
-.hero-sub { color:var(--muted-lt); font-size:.95rem; max-width:500px;
-            margin:0 auto 1.5rem; line-height:1.65; }
+.hero-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--muted-lt);
+    font-size: .78rem;
+    white-space: nowrap;
+    margin: 0 auto 1.5rem;
+    line-height: 1.65;
+    letter-spacing: .03em;
+}
 
 /* ── BENTO METRIC ── */
 .bento { display:grid; grid-template-columns:repeat(4,1fr); gap:.9rem; margin:1.25rem 0; }
@@ -261,6 +278,9 @@ def load_assets():
 
 model, meta, df_ref, FEATURES = load_assets()
 THRESHOLD = meta.get("threshold", 0.32)
+KURS = 17500  # Kurs referensi USD → IDR (per Juli 2026)
+def fmt_idr(n):
+    return f"Rp {n:,.0f}".replace(",", ".")
 X_ref     = df_ref[FEATURES]
 
 
@@ -281,35 +301,48 @@ def get_action(risk):
         "Low Risk"     : "📊 Monitor bulanan. Tidak perlu intervensi aktif saat ini.",
     }.get(risk, "-")
 
-def num_input_with_slider(label, min_v, max_v, default, step=1, fmt="%d", key=None, help=None):
-    """Dual input: number box + slider"""
+def num_input_with_slider(label, min_v, max_v, default, step=1, fmt="%d", key=None, help=None, is_float=False):
     col_n, col_s = st.columns([1, 2])
     with col_n:
+        fmt_str = "%.2f" if is_float else "%.0f"
         val_n = st.number_input(label, min_value=float(min_v), max_value=float(max_v),
                                 value=float(default), step=float(step),
-                                key=f"n_{key}", help=help, label_visibility="visible")
+                                key=f"n_{key}", help=help,
+                                label_visibility="visible", format=fmt_str)
     with col_s:
         st.markdown("<div style='margin-top:1.65rem'></div>", unsafe_allow_html=True)
-        val_s = st.slider("", min_value=float(min_v), max_value=float(max_v),
-                          value=float(val_n), step=float(step),
-                          key=f"s_{key}", label_visibility="collapsed")
-    # Sync: slider mengikuti number input
-    return val_n
-
+        if is_float:
+            val_s = st.slider("", min_value=float(min_v), max_value=float(max_v),
+                              value=float(val_n), step=float(step),
+                              key=f"s_{key}", label_visibility="collapsed",
+                              format="%.2f")
+        else:
+            val_s = st.slider("", min_value=int(min_v), max_value=int(max_v),
+                              value=int(val_n), step=int(step),
+                              key=f"s_{key}", label_visibility="collapsed",
+                              format="%d")
+    return float(val_n) if is_float else int(val_n)
 
 # ============================================================
 # HERO
 # ============================================================
 st.markdown("""
-<div class="hero">
-    <div class="hero-eyebrow">
-        <span>📊</span> Business Intelligence · RavenStack AI
+<div style="position:relative">
+    <div style="position:absolute;top:0;right:0;
+         background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);
+         border-radius:100px;padding:.3rem .9rem;
+         font-size:.72rem;color:#67e8f9;letter-spacing:.08em">
+        ⚡ Developed by Pandu Bashir Alamin
     </div>
-    <h1 class="hero-title">Customer Churn<br>Intelligence Platform</h1>
-    <p class="hero-sub">
-        Identifikasi pelanggan berisiko sebelum mereka pergi.
-        Prediksi real-time berbasis 83 sinyal bisnis &amp; perilaku.
-    </p>
+    <div class="hero">
+        <div class="hero-eyebrow">
+            <span>📊</span> Business Intelligence · RavenStack AI
+        </div>
+        <h1 class="hero-title">Customer Churn<br>Intelligence Platform</h1>
+        <p class="hero-sub">
+    Identifikasi pelanggan berisiko sebelum mereka pergi. Prediksi real-time berbasis 83 sinyal bisnis &amp; perilaku.
+</p>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -323,7 +356,7 @@ at_risk      = int((model.predict_proba(X_ref)[:,1] >= THRESHOLD).sum())
 model_recall = meta.get("metrics", {}).get("recall", 0)
 mrr_at_risk  = df_ref[model.predict_proba(X_ref)[:,1] >= THRESHOLD]['total_mrr'].sum() \
                if 'total_mrr' in df_ref.columns else 0
-
+mrr_at_risk_idr = mrr_at_risk * KURS
 st.markdown(f"""
 <div class="bento">
     <div class="bcard">
@@ -347,7 +380,7 @@ st.markdown(f"""
     <div class="bcard">
         <div class="bcard-icon">💰</div>
         <div class="bcard-label">MRR at Risk</div>
-        <div class="bcard-value" style="color:#10b981">${mrr_at_risk:,.0f}</div>
+        <div class="bcard-value" style="color:#10b981">{fmt_idr(mrr_at_risk_idr)}</div>
         <div class="bcard-sub">potensi revenue hilang</div>
     </div>
 </div>
@@ -412,11 +445,21 @@ with col_left:
         st.markdown('<div style="font-size:.75rem;color:#6366f1;text-transform:uppercase;letter-spacing:.08em;margin:.75rem 0 .4rem">💰 Revenue</div>', unsafe_allow_html=True)
         c3, c4 = st.columns(2)
         with c3:
-            total_mrr = num_input_with_slider("Total MRR ($)", 0, 3000, 300, 10, key="mrr",
-                                              help="Monthly Recurring Revenue pelanggan ini")
+            mrr_input_str = st.text_input(
+                "Total MRR (Rp)",
+                value="5.000.000",
+                help="Ketik nominal MRR dalam Rupiah, contoh: 5.000.000",
+                key="mrr_text"
+            )
+            try:
+                total_mrr_idr = int(mrr_input_str.replace(".", "").replace(",", "").replace("Rp", "").strip())
+            except:
+                total_mrr_idr = 5_000_000
+            total_mrr_idr = max(0, min(total_mrr_idr, 35_000_000))
+            total_mrr = total_mrr_idr / KURS
+            st.caption(f"≈ USD ${total_mrr:,.0f} | Range: Rp 0 – Rp 35.000.000")
         with c4:
-            sub_churn_ratio = num_input_with_slider("Subscription churn ratio", 0.0, 1.0, 0.2, 0.05, key="sub_churn",
-                                                     help="Proporsi subscription yang pernah churn")
+            sub_churn_ratio = num_input_with_slider("Subscription churn ratio", 0.0, 1.0, 0.2, 0.05, key="sub_churn",is_float=True)
 
         # ── Group 3: Engagement ──
         st.markdown('<div style="font-size:.75rem;color:#6366f1;text-transform:uppercase;letter-spacing:.08em;margin:.75rem 0 .4rem">📱 Engagement & Penggunaan</div>', unsafe_allow_html=True)
@@ -430,27 +473,27 @@ with col_left:
 
         c7, c8 = st.columns(2)
         with c7:
-            net_plan_movement = num_input_with_slider("Net plan movement", -5, 5, 0, 1, key="plan",
-                                                       help="Positif = pernah upgrade, negatif = downgrade")
+                    net_plan_movement = num_input_with_slider(
+            "Net plan movement", -5, 5, 0, 1, key="plan",
+            help="Positif = pernah upgrade, negatif = downgrade, 0 = tidak ada perubahan")
         with c8:
-            usage_density = num_input_with_slider("Usage density (events/hari)", 0.0, 20.0, 3.0, 0.5, key="density",
-                                                   help="Rata-rata aktivitas per hari aktif")
+           usage_density = num_input_with_slider("Usage density (events/hari)", 0.0, 20.0, 3.0, 0.5, key="density", is_float=True)
 
         # ── Group 4: Support ──
         st.markdown('<div style="font-size:.75rem;color:#6366f1;text-transform:uppercase;letter-spacing:.08em;margin:.75rem 0 .4rem">🎧 Customer Support</div>', unsafe_allow_html=True)
         c9, c10 = st.columns(2)
         with c9:
             avg_satisfaction_score = num_input_with_slider("Satisfaction score (1–5)", 1.0, 5.0, 3.5, 0.1, key="sat",
-                                                            help="Rata-rata skor kepuasan dari tiket support")
+                                                            help="Rata-rata skor kepuasan dari tiket support", is_float=True)
         with c10:
             total_tickets = num_input_with_slider("Total tiket support", 0, 50, 3, 1, key="tickets")
 
         c11, c12 = st.columns(2)
         with c11:
-            escalation_rate = num_input_with_slider("Escalation rate (0–1)", 0.0, 1.0, 0.1, 0.05, key="esc",
-                                                     help="Proporsi tiket yang dieskalasi")
+            escalation_rate = num_input_with_slider("Escalation rate (0–1)", 0.0, 1.0, 0.1, 0.05, key="esc", is_float=True)
+                                                     
         with c12:
-            pct_urgent = num_input_with_slider("% tiket urgent (0–1)", 0.0, 1.0, 0.1, 0.05, key="urgent")
+            pct_urgent = num_input_with_slider("% tiket urgent (0–1)", 0.0, 1.0, 0.1, 0.05, is_float=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
         predict_btn = st.button("🔮 Analisis Risiko Churn", use_container_width=True)
@@ -493,7 +536,7 @@ with col_left:
         <div class="gcard" style="margin-top:.75rem">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem">
                 <div class="sig-row"><span class="sig-name">🏢 Tenure</span><span class="sig-val">{s['tenure_days']} hari</span></div>
-                <div class="sig-row"><span class="sig-name">💰 MRR</span><span class="sig-val">${s['total_mrr']}</span></div>
+                <div class="sig-row"><span class="sig-name">💰 MRR</span><span class="sig-val">{fmt_idr(s['total_mrr'] * KURS)}</span></div>
                 <div class="sig-row"><span class="sig-name">📱 Last login</span><span class="sig-val">{s['days_since_last_usage']} hari lalu</span></div>
                 <div class="sig-row"><span class="sig-name">🔧 Fitur dipakai</span><span class="sig-val">{s['unique_features_used']}/40</span></div>
                 <div class="sig-row"><span class="sig-name">⭐ Satisfaction</span><span class="sig-val">{s['avg_satisfaction_score']}/5</span></div>
@@ -511,7 +554,7 @@ with col_left:
             days_since_last_usage=s["days_since_last_usage"]; unique_features_used=s["unique_features_used"]
             avg_satisfaction_score=s["avg_satisfaction_score"]; total_tickets=s["total_tickets"]
             escalation_rate=s["escalation_rate"]; sub_churn_ratio=s["sub_churn_ratio"]
-            net_plan_movement=s["net_plan_movement"]; seats=s["seats"]
+            net_plan_movement=int(s["net_plan_movement"])
             pct_urgent=s["pct_urgent"]; usage_density=s["usage_density"]
             predict_btn=True
 
@@ -680,8 +723,8 @@ with col_f2:
     <div style="font-size:.75rem;color:#475569;text-align:center">
         <strong style="color:#6366f1">📊 Dataset</strong><br>
         RavenStack Synthetic SaaS<br>
-        by <a href="https://rivalytics.medium.com" target="_blank"
-        style="color:#6366f1">River @ Rivalytics</a>
+        by <a href="https://pandubashir.my.id" target="_blank"
+        style="color:#6366f1">Pandu Bashir Alamin</a>
     </div>""", unsafe_allow_html=True)
 with col_f3:
     st.markdown("""
