@@ -336,7 +336,25 @@ st.markdown("""
         <div class="hero-eyebrow">
             <span>📊</span> Business Intelligence · RavenStack AI
         </div>
-        <h1 class="hero-title">Customer Churn<br>Intelligence Platform</h1>
+        <svg width="100%" viewBox="0 0 800 120" style="overflow:visible;margin:0 0 .9rem">
+        <defs>
+            <linearGradient id="tg" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#f1f5f9"/>
+                <stop offset="50%" style="stop-color:#a5b4fc"/>
+                <stop offset="100%" style="stop-color:#22d3ee"/>
+            </linearGradient>
+        </defs>
+        <text x="400" y="48" text-anchor="middle"
+              font-family="Space Grotesk, sans-serif"
+              font-size="52" font-weight="700" fill="url(#tg)">
+            Customer Churn
+        </text>
+        <text x="400" y="108" text-anchor="middle"
+              font-family="Space Grotesk, sans-serif"
+              font-size="52" font-weight="700" fill="url(#tg)">
+            Intelligence Platform
+        </text>
+    </svg>
         <p class="hero-sub">
     Identifikasi pelanggan berisiko sebelum mereka pergi. Prediksi real-time berbasis 83 sinyal bisnis &amp; perilaku.
 </p>
