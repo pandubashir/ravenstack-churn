@@ -110,6 +110,10 @@ hr { border:none!important; border-top:1px solid var(--border)!important; margin
 .hero-title {
     font-family:'Space Grotesk',sans-serif;
     font-size:clamp(2rem,4.5vw,3.2rem); font-weight:700; line-height:1.1;
+    background: linear-gradient(130deg, #f1f5f9 30%, #a5b4fc 70%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     color: #f1f5f9;
     margin:0 0 .9rem;
 
