@@ -110,9 +110,9 @@ hr { border:none!important; border-top:1px solid var(--border)!important; margin
 .hero-title {
     font-family:'Space Grotesk',sans-serif;
     font-size:clamp(2rem,4.5vw,3.2rem); font-weight:700; line-height:1.1;
-    background:linear-gradient(130deg,#f1f5f9 25%,var(--indigo-lt) 60%,var(--cyan) 100%);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    background-clip:text; margin:0 0 .9rem;
+    color: #f1f5f9;
+    margin:0 0 .9rem;
+
 }
 .hero-sub {
     font-family: 'Montserrat', sans-serif;
@@ -302,26 +302,20 @@ def get_action(risk):
     }.get(risk, "-")
 
 def num_input_with_slider(label, min_v, max_v, default, step=1, fmt="%d", key=None, help=None, is_float=False):
-    col_n, col_s = st.columns([1, 2])
-    with col_n:
-        fmt_str = "%.2f" if is_float else "%.0f"
-        val_n = st.number_input(label, min_value=float(min_v), max_value=float(max_v),
-                                value=float(default), step=float(step),
-                                key=f"n_{key}", help=help,
-                                label_visibility="visible", format=fmt_str)
-    with col_s:
-        st.markdown("<div style='margin-top:1.65rem'></div>", unsafe_allow_html=True)
-        if is_float:
-            val_s = st.slider("", min_value=float(min_v), max_value=float(max_v),
-                              value=float(val_n), step=float(step),
-                              key=f"s_{key}", label_visibility="collapsed",
-                              format="%.2f")
-        else:
-            val_s = st.slider("", min_value=int(min_v), max_value=int(max_v),
-                              value=int(val_n), step=int(step),
-                              key=f"s_{key}", label_visibility="collapsed",
-                              format="%d")
-    return float(val_n) if is_float else int(val_n)
+    fmt_str = "%.2f" if is_float else "%.0f"
+    val = st.number_input(label, min_value=float(min_v), max_value=float(max_v),
+                          value=float(default), step=float(step),
+                          key=f"n_{key}", help=help,
+                          label_visibility="visible", format=fmt_str)
+    if is_float:
+        st.slider("", min_value=float(min_v), max_value=float(max_v),
+                  value=float(val), step=float(step),
+                  key=f"s_{key}", label_visibility="collapsed", format="%.2f")
+    else:
+        st.slider("", min_value=int(min_v), max_value=int(max_v),
+                  value=int(val), step=int(step),
+                  key=f"s_{key}", label_visibility="collapsed", format="%d")
+    return float(val) if is_float else int(val)
 
 # ============================================================
 # HERO
