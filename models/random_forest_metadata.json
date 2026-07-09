@@ -1,0 +1,32 @@
+{
+  "model": "Random Forest Anti-Overfit",
+  "n_features": 83,
+  "selected_features": "all (83 fitur)",
+  "params": {
+    "n_estimators": 200,
+    "max_depth": 10,
+    "min_samples_leaf": 3,
+    "min_samples_split": 8,
+    "max_features": "sqrt",
+    "max_samples": 0.9,
+    "class_weight": "balanced",
+    "bootstrap": true
+  },
+  "threshold": 0.33,
+  "business_reason": "Recall tertinggi (0.8636) \u2014 biaya kehilangan pelanggan > biaya False Positive. FP memiliki efek positif pada loyalitas pelanggan SaaS B2B.",
+  "metrics": {
+    "recall": 0.8636,
+    "precision": 0.3393,
+    "f1": 0.4872,
+    "pr_auc": 0.3805,
+    "auc_roc": 0.6597,
+    "gap_overfit": 0.1203,
+    "cv_recall_mean": 0.8727,
+    "cv_recall_std": 0.0782
+  },
+  "journey": {
+    "RF Default gap": 0.982,
+    "RF Anti-Overfit gap": 0.12,
+    "improvement": "87% pengurangan overfit"
+  }
+}

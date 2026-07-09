@@ -272,8 +272,8 @@ label, [data-testid="stWidgetLabel"] p {
 # ============================================================
 @st.cache_resource
 def load_assets():
-    model  = joblib.load("models/xgboost_optimized.pkl")
-    meta   = json.load(open("models/xgboost_metadata.json"))
+    model  = joblib.load("models/random_forest_final.pkl")
+    meta   = json.load(open("models/random_forest_metadata.json"))
     df_ref = pd.read_csv("data/processed/ravenstack_features_for_modeling.csv")
     bc     = df_ref.select_dtypes(include='bool').columns
     df_ref[bc] = df_ref[bc].astype(int)
@@ -281,7 +281,7 @@ def load_assets():
     return model, meta, df_ref, feats
 
 model, meta, df_ref, FEATURES = load_assets()
-THRESHOLD = meta.get("threshold", 0.32)
+THRESHOLD = round(float(meta.get("threshold", 0.32)), 2)
 KURS = 17500  # Kurs referensi USD → IDR (per Juli 2026)
 def fmt_idr(n):
     return f"Rp {n:,.0f}".replace(",", ".")
@@ -650,7 +650,7 @@ with col_right:
             ("📱", "Last login",        f"{days_since_last_usage} hari lalu", sig_color(days_since_last_usage, True, 14)),
             ("⭐", "Satisfaction",      f"{avg_satisfaction_score:.1f} / 5",  sig_color(avg_satisfaction_score, False, 3.5)),
             ("🔧", "Feature breadth",   f"{unique_features_used} / 40",       sig_color(unique_features_used, False, 10)),
-            ("💰", "MRR",               f"${total_mrr:,}",                    "#f1f5f9"),
+            ("💰", "MRR", fmt_idr(total_mrr * KURS), "#f1f5f9"),
             ("🚨", "Escalation rate",   f"{escalation_rate:.0%}",             sig_color(escalation_rate, True, 0.2)),
             ("📊", "Plan movement",     f"{net_plan_movement:+d}",            sig_color(net_plan_movement, False, 0)),
             ("🎧", "Sub churn ratio",   f"{sub_churn_ratio:.0%}",             sig_color(sub_churn_ratio, True, 0.3)),
