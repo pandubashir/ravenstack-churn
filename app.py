@@ -731,8 +731,8 @@ with col_f1:
     st.markdown("""
     <div style="font-size:.75rem;color:#475569">
         <strong style="color:#6366f1">🔬 Model</strong><br>
-        XGBoost · RandomizedSearchCV<br>
-        SMOTE · Threshold 0.32
+        Random Forest · Anti-Overfit (max_depth=10)
+        SMOTE · Threshold 0.33
     </div>""", unsafe_allow_html=True)
 with col_f2:
     st.markdown("""
