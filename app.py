@@ -521,31 +521,32 @@ with col_left:
         </div>""", unsafe_allow_html=True)
 
         sample_choice = st.selectbox("", [
-            "🔴 Pelanggan Berisiko Tinggi — startup baru, banyak komplain",
-            "🟢 Pelanggan Sehat — enterprise, loyal & aktif",
-            "🟡 Pelanggan Borderline — perlu dipantau",
+           "🚀 Startup Baru — onboarding stage, banyak komplain",
+           "🏢 Enterprise Matang — loyal, high MRR, aktif",
+           "⚖️ Mid-Market — perlu dipantau",
         ], label_visibility="collapsed")
 
         SAMPLES = {
-            "🔴 Pelanggan Berisiko Tinggi — startup baru, banyak komplain": {
-                "tenure_days":45,"total_mrr":50,"days_since_last_usage":35,
-                "unique_features_used":2,"avg_satisfaction_score":1.5,
-                "total_tickets":12,"escalation_rate":0.75,"sub_churn_ratio":0.6,
-                "net_plan_movement":-2,"seats":3,"pct_urgent":0.5,"usage_density":0.5,
-            },
-            "🟢 Pelanggan Sehat — enterprise, loyal & aktif": {
-                "tenure_days":600,"total_mrr":1200,"days_since_last_usage":1,
-                "unique_features_used":32,"avg_satisfaction_score":4.9,
-                "total_tickets":1,"escalation_rate":0.0,"sub_churn_ratio":0.0,
-                "net_plan_movement":4,"seats":50,"pct_urgent":0.0,"usage_density":12.0,
-            },
-            "🟡 Pelanggan Borderline — perlu dipantau": {
-                "tenure_days":210,"total_mrr":280,"days_since_last_usage":13,
-                "unique_features_used":10,"avg_satisfaction_score":3.0,
-                "total_tickets":5,"escalation_rate":0.2,"sub_churn_ratio":0.25,
-                "net_plan_movement":0,"seats":9,"pct_urgent":0.15,"usage_density":2.5,
-            },
-        }
+                "🚀 Startup Baru — onboarding stage, banyak komplain": {
+                    "tenure_days":45,"total_mrr":50,"days_since_last_usage":35,
+                    "unique_features_used":2,"avg_satisfaction_score":1.5,
+                    "total_tickets":12,"escalation_rate":0.75,"sub_churn_ratio":0.6,
+                    "net_plan_movement":-2,"seats":3,"pct_urgent":0.5,"usage_density":0.5,
+                },
+                "🏢 Enterprise Matang — loyal, high MRR, aktif": {
+                    "tenure_days":600,"total_mrr":1200,"days_since_last_usage":1,
+                    "unique_features_used":32,"avg_satisfaction_score":4.9,
+                    "total_tickets":1,"escalation_rate":0.0,"sub_churn_ratio":0.0,
+                    "net_plan_movement":4,"seats":50,"pct_urgent":0.0,"usage_density":12.0,
+                },
+                "⚖️ Mid-Market — perlu dipantau": {
+                    "tenure_days":210,"total_mrr":280,"days_since_last_usage":13,
+                    "unique_features_used":10,"avg_satisfaction_score":3.0,
+                    "total_tickets":5,"escalation_rate":0.2,"sub_churn_ratio":0.25,
+                    "net_plan_movement":0,"seats":9,"pct_urgent":0.15,"usage_density":2.5,
+                },
+            }
+        
 
         s = SAMPLES[sample_choice]
         st.markdown(f"""
