@@ -286,6 +286,8 @@ KURS = 17500  # Kurs referensi USD → IDR (per Juli 2026)
 def fmt_idr(n):
     return f"Rp {n:,.0f}".replace(",", ".")
 X_ref     = df_ref[FEATURES]
+if 'selected_sample' not in st.session_state:
+    st.session_state.selected_sample = {}
 
 
 # ============================================================
@@ -528,22 +530,37 @@ with col_left:
 
         SAMPLES = {
                 "🚀 Startup Baru — onboarding stage, banyak komplain": {
-                    "tenure_days":45,"total_mrr":50,"days_since_last_usage":35,
-                    "unique_features_used":2,"avg_satisfaction_score":1.5,
-                    "total_tickets":12,"escalation_rate":0.75,"sub_churn_ratio":0.6,
-                    "net_plan_movement":-2,"seats":3,"pct_urgent":0.5,"usage_density":0.5,
-                },
-                "🏢 Enterprise Matang — loyal, high MRR, aktif": {
-                    "tenure_days":600,"total_mrr":1200,"days_since_last_usage":1,
-                    "unique_features_used":32,"avg_satisfaction_score":4.9,
-                    "total_tickets":1,"escalation_rate":0.0,"sub_churn_ratio":0.0,
-                    "net_plan_movement":4,"seats":50,"pct_urgent":0.0,"usage_density":12.0,
-                },
-                "⚖️ Mid-Market — perlu dipantau": {
-                    "tenure_days":210,"total_mrr":280,"days_since_last_usage":13,
-                    "unique_features_used":10,"avg_satisfaction_score":3.0,
-                    "total_tickets":5,"escalation_rate":0.2,"sub_churn_ratio":0.25,
-                    "net_plan_movement":0,"seats":9,"pct_urgent":0.15,"usage_density":2.5,
+        "tenure_days":45,"total_mrr":50,"days_since_last_usage":35,
+        "unique_features_used":2,"avg_satisfaction_score":1.5,
+        "total_tickets":12,"escalation_rate":0.75,"sub_churn_ratio":0.6,
+        "net_plan_movement":-2,"seats":3,"pct_urgent":0.5,"usage_density":0.5,
+        "error_rate":0.8,"avg_error_count":0.8,
+        "feature_breadth_ratio":0.05,"ever_downgraded":1,
+        "has_low_satisfaction":1,"churn_event_count":1,
+        "total_refund_usd":0,"days_since_last_churn":30,
+        "pct_annual_billing":0.0,"avg_first_response_mins":180.0,
+    },
+    "🏢 Enterprise Matang — loyal, high MRR, aktif": {
+        "tenure_days":600,"total_mrr":1200,"days_since_last_usage":1,
+        "unique_features_used":32,"avg_satisfaction_score":4.9,
+        "total_tickets":1,"escalation_rate":0.0,"sub_churn_ratio":0.0,
+        "net_plan_movement":4,"seats":50,"pct_urgent":0.0,"usage_density":12.0,
+        "error_rate":0.01,"avg_error_count":0.01,
+        "feature_breadth_ratio":0.80,"ever_downgraded":0,
+        "has_low_satisfaction":0,"churn_event_count":0,
+        "total_refund_usd":0,"days_since_last_churn":0,
+        "pct_annual_billing":0.9,"avg_first_response_mins":10.0,
+    },
+    "⚖️ Mid-Market — perlu dipantau": {
+        "tenure_days":210,"total_mrr":280,"days_since_last_usage":13,
+        "unique_features_used":10,"avg_satisfaction_score":3.0,
+        "total_tickets":5,"escalation_rate":0.2,"sub_churn_ratio":0.25,
+        "net_plan_movement":0,"seats":9,"pct_urgent":0.15,"usage_density":2.5,
+        "error_rate":0.4,"avg_error_count":0.4,
+        "feature_breadth_ratio":0.25,"ever_downgraded":0,
+        "has_low_satisfaction":0,"churn_event_count":0,
+        "total_refund_usd":0,"days_since_last_churn":0,
+        "pct_annual_billing":0.5,"avg_first_response_mins":60.0,
                 },
             }
         
@@ -568,12 +585,24 @@ with col_left:
 
         if sample_btn:
             tenure_days=s["tenure_days"]; total_mrr=s["total_mrr"]
-            days_since_last_usage=s["days_since_last_usage"]; unique_features_used=s["unique_features_used"]
-            avg_satisfaction_score=s["avg_satisfaction_score"]; total_tickets=s["total_tickets"]
-            escalation_rate=s["escalation_rate"]; sub_churn_ratio=s["sub_churn_ratio"]
+            days_since_last_usage=s["days_since_last_usage"]
+            unique_features_used=s["unique_features_used"]
+            avg_satisfaction_score=s["avg_satisfaction_score"]
+            total_tickets=s["total_tickets"]
+            escalation_rate=s["escalation_rate"]
+            sub_churn_ratio=s["sub_churn_ratio"]
             net_plan_movement=int(s["net_plan_movement"])
-            pct_urgent=s["pct_urgent"]; usage_density=s["usage_density"]
-            predict_btn=True
+            seats=s["seats"]
+            pct_urgent=s["pct_urgent"]
+            usage_density=s["usage_density"]
+            # fitur tambahan dari SAMPLES
+            _extra = {k: v for k, v in s.items()
+                      if k not in ["tenure_days","total_mrr","days_since_last_usage",
+                                   "unique_features_used","avg_satisfaction_score",
+                                   "total_tickets","escalation_rate","sub_churn_ratio",
+                                   "net_plan_movement","seats","pct_urgent","usage_density"]}
+            st.session_state.selected_sample = s 
+            predict_btn = True
 
 
 # ============================================================
@@ -583,7 +612,11 @@ with col_right:
     st.markdown('<div class="slabel">📈 Hasil Analisis Risiko</div>', unsafe_allow_html=True)
 
     if predict_btn:
-        base = X_ref.mean().to_dict()
+        _ss = st.session_state.selected_sample
+        
+        # Gunakan 0 sebagai default, bukan mean dataset
+        base = {col: 0 for col in FEATURES}
+        
         base.update({
             "tenure_days"            : tenure_days,
             "total_mrr"              : total_mrr,
@@ -602,7 +635,48 @@ with col_right:
             "seats"                  : seats,
             "pct_urgent"             : pct_urgent,
             "usage_density"          : usage_density,
-        })
+            "error_rate"             : _ss.get("error_rate", escalation_rate * 0.5),
+            "avg_error_count"        : _ss.get("avg_error_count", escalation_rate * 0.5),
+            "avg_first_response_mins": _ss.get("avg_first_response_mins", 180.0 if escalation_rate > 0.5 else 30.0),
+            "pct_annual_billing"     : _ss.get("pct_annual_billing", 0.9 if net_plan_movement > 0 else 0.3),
+            "ever_downgraded"        : _ss.get("ever_downgraded", 1 if net_plan_movement < 0 else 0),
+            "has_low_satisfaction"   : _ss.get("has_low_satisfaction", 1 if avg_satisfaction_score < 2.5 else 0),
+            "churn_event_count"      : _ss.get("churn_event_count", 0),
+            "total_refund_usd"       : 0,
+            "days_since_last_churn"  : 0,
+            "max_mrr"                  : total_mrr,
+            "subscription_duration_avg": tenure_days * 0.8,
+            "avg_usage_duration_secs"  : usage_density * 300,
+            "total_usage_events"       : usage_density * 30,
+            "total_usage_count"        : usage_density * 30,
+            "usage_days"               : min(30, int(tenure_days * 0.7)),
+            "total_usage_duration_secs": usage_density * 300 * 30,
+            "avg_usage_count"          : usage_density,
+            "total_subscriptions"      : 1,
+            "active_subscriptions"     : 1,
+            "churned_subscriptions"    : int(sub_churn_ratio),
+            "num_upgrades"             : max(0, net_plan_movement),
+            "num_downgrades"           : max(0, -net_plan_movement),
+            "num_trials"               : 0,
+            "has_auto_renew"           : 1,
+            "net_plan_movement"        : net_plan_movement,
+            "beta_feature_usage_count" : 0,
+            "total_tickets"            : total_tickets,
+            "num_urgent_tickets"       : int(pct_urgent * total_tickets),
+            "num_high_tickets"         : int(pct_urgent * total_tickets * 0.5),
+            "critical_ticket_count"    : int(pct_urgent * total_tickets),
+            "min_satisfaction_score"   : avg_satisfaction_score - 0.5,
+            "max_resolution_hours"     : 48.0 if escalation_rate > 0.3 else 8.0,
+            "avg_resolution_hours"     : 24.0 if escalation_rate > 0.3 else 4.0,
+            # One-hot defaults — set industry_DevTools sebagai default
+            "industry_DevTools"        : 1,
+            "referral_source_organic"  : 1,
+            "recency_bucket_encoded"   : 1 if days_since_last_usage <= 7 else 2 if days_since_last_usage <= 30 else 3,
+            "latest_plan_tier_encoded" : 1 if net_plan_movement >= 0 else 0,
+            "seats_bucket_encoded"     : 0 if seats <= 5 else 1 if seats <= 20 else 2 if seats <= 50 else 3,
+            "tenure_bucket_encoded"    : 0 if tenure_days <= 90 else 1 if tenure_days <= 180 else 2 if tenure_days <= 365 else 3,
+                })
+       
 
         X_in = pd.DataFrame([base]).reindex(columns=FEATURES, fill_value=0)
         bc   = X_in.select_dtypes(include='bool').columns
