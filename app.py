@@ -562,10 +562,28 @@ with col_left:
         </div>
         """, unsafe_allow_html=True)
 
+        def profil_label(row):
+            tenure = row['tenure_days']
+            mrr    = row['total_mrr']
+            sat    = row['avg_satisfaction_score']
+            esc    = row['escalation_rate']
+
+            if tenure < 90:
+                nama = "🚀 Startup Baru"
+                tag  = f"onboarding stage, {'banyak komplain' if esc > 0.3 else 'baru mulai'}"
+            elif mrr >= 5000:
+                nama = "🏢 Enterprise Matang"
+                tag  = f"{'loyal' if sat >= 4 else 'butuh perhatian'}, high MRR, {'aktif' if row['days_since_last_usage'] <= 14 else 'idle'}"
+            else:
+                nama = "⚖️ Mid-Market"
+                tag  = "perlu dipantau" if esc > 0.15 else "stabil"
+
+            return f"{nama} — {tag}"
+
+        risk_emoji_map = {'high': '🔴', 'border': '🟡', 'low': '🟢'}
         real_labels = {
-            'high':   "🔴 Risiko Tertinggi",
-            'border': "🟡 Perlu Dipantau",
-            'low':    "🟢 Risiko Terendah",
+            k: f"{risk_emoji_map[k]} {profil_label(REAL_EXAMPLES[k])}"
+            for k in REAL_EXAMPLES
         }
         available = [k for k in ['high', 'border', 'low'] if k in REAL_EXAMPLES]
 
