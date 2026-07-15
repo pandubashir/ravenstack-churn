@@ -272,15 +272,45 @@ label, [data-testid="stWidgetLabel"] p {
 # ============================================================
 @st.cache_resource
 def load_assets():
+    from sklearn.model_selection import train_test_split
+
     model  = joblib.load("models/random_forest_final.pkl")
     meta   = json.load(open("models/random_forest_metadata.json"))
     df_ref = pd.read_csv("data/processed/ravenstack_features_for_modeling.csv")
     bc     = df_ref.select_dtypes(include='bool').columns
     df_ref[bc] = df_ref[bc].astype(int)
     feats  = [c for c in df_ref.columns if c != 'target']
-    return model, meta, df_ref, feats
 
-model, meta, df_ref, FEATURES = load_assets()
+    X_full = df_ref[feats]
+    y_full = df_ref['target']
+
+    # Reproduksi SPLIT YANG SAMA PERSIS dengan training (lihat notebook 02, SEED=42)
+    # supaya kita tahu persis baris mana yang TIDAK PERNAH dilihat model.
+    _, X_test, _, y_test = train_test_split(
+        X_full, y_full, test_size=0.2, random_state=42, stratify=y_full
+    )
+
+    threshold  = float(meta.get("threshold", 0.32))
+    proba_test = model.predict_proba(X_test)[:, 1]
+
+    test_df = X_test.copy()
+    test_df['_proba']  = proba_test
+    test_df['_target'] = y_test.values
+
+    real_examples = {}
+    churned_test = test_df[test_df['_target'] == 1]
+    safe_test    = test_df[test_df['_target'] == 0]
+
+    if len(churned_test) > 0:
+        real_examples['high']   = test_df.loc[churned_test['_proba'].idxmax()]
+    if len(safe_test) > 0:
+        real_examples['low']    = test_df.loc[safe_test['_proba'].idxmin()]
+    if len(test_df) > 0:
+        real_examples['border'] = test_df.loc[(test_df['_proba'] - threshold).abs().idxmin()]
+
+    return model, meta, df_ref, feats, real_examples
+
+model, meta, df_ref, FEATURES, REAL_EXAMPLES = load_assets()
 THRESHOLD = round(float(meta.get("threshold", 0.32)), 2)
 KURS = 17500  # Kurs referensi USD → IDR (per Juli 2026)
 def fmt_idr(n):
@@ -288,6 +318,10 @@ def fmt_idr(n):
 X_ref     = df_ref[FEATURES]
 if 'selected_sample' not in st.session_state:
     st.session_state.selected_sample = {}
+if 'input_mode' not in st.session_state:
+    st.session_state.input_mode = None
+if 'selected_real_row' not in st.session_state:
+    st.session_state.selected_real_row = None
 
 
 # ============================================================
@@ -441,7 +475,9 @@ col_left, col_right = st.columns([1.15, 0.85], gap="large")
 with col_left:
     st.markdown('<div class="slabel">📋 Input Data Pelanggan</div>', unsafe_allow_html=True)
 
-    tab_manual, tab_sample = st.tabs(["✏️  Input Manual", "📁  Contoh Profil"])
+    tab_manual, tab_real = st.tabs(
+        ["✏️  Input Manual", "📁  Contoh Profil"]
+    )
 
     with tab_manual:
         st.markdown("""
@@ -515,94 +551,63 @@ with col_left:
 
         st.markdown("<br>", unsafe_allow_html=True)
         predict_btn = st.button("🔮 Analisis Risiko Churn", use_container_width=True)
+        if predict_btn:
+            st.session_state.input_mode = "manual"
 
-    with tab_sample:
+    with tab_real:
         st.markdown("""
         <div style="font-size:.8rem;color:#64748b;margin-bottom:1rem">
-        Pilih profil contoh untuk melihat cara kerja model.
-        </div>""", unsafe_allow_html=True)
-
-        sample_choice = st.selectbox("", [
-           "🚀 Startup Baru — onboarding stage, banyak komplain",
-           "🏢 Enterprise Matang — loyal, high MRR, aktif",
-           "⚖️ Mid-Market — perlu dipantau",
-        ], label_visibility="collapsed")
-
-        SAMPLES = {
-                "🚀 Startup Baru — onboarding stage, banyak komplain": {
-        "tenure_days":45,"total_mrr":50,"days_since_last_usage":35,
-        "unique_features_used":2,"avg_satisfaction_score":1.5,
-        "total_tickets":12,"escalation_rate":0.75,"sub_churn_ratio":0.6,
-        "net_plan_movement":-2,"seats":3,"pct_urgent":0.5,"usage_density":0.5,
-        "error_rate":0.8,"avg_error_count":0.8,
-        "feature_breadth_ratio":0.05,"ever_downgraded":1,
-        "has_low_satisfaction":1,"churn_event_count":1,
-        "total_refund_usd":0,"days_since_last_churn":30,
-        "pct_annual_billing":0.0,"avg_first_response_mins":180.0,
-    },
-    "🏢 Enterprise Matang — loyal, high MRR, aktif": {
-        "tenure_days":600,"total_mrr":1200,"days_since_last_usage":1,
-        "unique_features_used":32,"avg_satisfaction_score":4.9,
-        "total_tickets":1,"escalation_rate":0.0,"sub_churn_ratio":0.0,
-        "net_plan_movement":4,"seats":50,"pct_urgent":0.0,"usage_density":12.0,
-        "error_rate":0.01,"avg_error_count":0.01,
-        "feature_breadth_ratio":0.80,"ever_downgraded":0,
-        "has_low_satisfaction":0,"churn_event_count":0,
-        "total_refund_usd":0,"days_since_last_churn":0,
-        "pct_annual_billing":0.9,"avg_first_response_mins":10.0,
-    },
-    "⚖️ Mid-Market — perlu dipantau": {
-        "tenure_days":210,"total_mrr":280,"days_since_last_usage":13,
-        "unique_features_used":10,"avg_satisfaction_score":3.0,
-        "total_tickets":5,"escalation_rate":0.2,"sub_churn_ratio":0.25,
-        "net_plan_movement":0,"seats":9,"pct_urgent":0.15,"usage_density":2.5,
-        "error_rate":0.4,"avg_error_count":0.4,
-        "feature_breadth_ratio":0.25,"ever_downgraded":0,
-        "has_low_satisfaction":0,"churn_event_count":0,
-        "total_refund_usd":0,"days_since_last_churn":0,
-        "pct_annual_billing":0.5,"avg_first_response_mins":60.0,
-                },
-            }
-        
-
-        s = SAMPLES[sample_choice]
-        st.markdown(f"""
-        <div class="gcard" style="margin-top:.75rem">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem">
-                <div class="sig-row"><span class="sig-name">🏢 Tenure</span><span class="sig-val">{s['tenure_days']} hari</span></div>
-                <div class="sig-row"><span class="sig-name">💰 MRR</span><span class="sig-val">{fmt_idr(s['total_mrr'] * KURS)}</span></div>
-                <div class="sig-row"><span class="sig-name">📱 Last login</span><span class="sig-val">{s['days_since_last_usage']} hari lalu</span></div>
-                <div class="sig-row"><span class="sig-name">🔧 Fitur dipakai</span><span class="sig-val">{s['unique_features_used']}/40</span></div>
-                <div class="sig-row"><span class="sig-name">⭐ Satisfaction</span><span class="sig-val">{s['avg_satisfaction_score']}/5</span></div>
-                <div class="sig-row"><span class="sig-name">🎧 Tiket</span><span class="sig-val">{s['total_tickets']}</span></div>
-                <div class="sig-row"><span class="sig-name">🚨 Escalation</span><span class="sig-val">{s['escalation_rate']:.0%}</span></div>
-                <div class="sig-row"><span class="sig-name">📊 Plan movement</span><span class="sig-val">{s['net_plan_movement']:+d}</span></div>
-            </div>
+        Pilih profil contoh untuk melihat cara kerja model
+        <span style="color:#475569">(diambil dari akun pelanggan sungguhan, bukan skenario buatan)</span>.
         </div>
         """, unsafe_allow_html=True)
 
-        sample_btn = st.button("🔍 Prediksi Profil Ini", use_container_width=True)
+        real_labels = {
+            'high':   "🔴 Risiko Tertinggi",
+            'border': "🟡 Perlu Dipantau",
+            'low':    "🟢 Risiko Terendah",
+        }
+        available = [k for k in ['high', 'border', 'low'] if k in REAL_EXAMPLES]
 
-        if sample_btn:
-            tenure_days=s["tenure_days"]; total_mrr=s["total_mrr"]
-            days_since_last_usage=s["days_since_last_usage"]
-            unique_features_used=s["unique_features_used"]
-            avg_satisfaction_score=s["avg_satisfaction_score"]
-            total_tickets=s["total_tickets"]
-            escalation_rate=s["escalation_rate"]
-            sub_churn_ratio=s["sub_churn_ratio"]
-            net_plan_movement=int(s["net_plan_movement"])
-            seats=s["seats"]
-            pct_urgent=s["pct_urgent"]
-            usage_density=s["usage_density"]
-            # fitur tambahan dari SAMPLES
-            _extra = {k: v for k, v in s.items()
-                      if k not in ["tenure_days","total_mrr","days_since_last_usage",
-                                   "unique_features_used","avg_satisfaction_score",
-                                   "total_tickets","escalation_rate","sub_churn_ratio",
-                                   "net_plan_movement","seats","pct_urgent","usage_density"]}
-            st.session_state.selected_sample = s 
-            predict_btn = True
+        if not available:
+            st.warning("Data contoh real tidak tersedia.")
+        else:
+            real_choice = st.selectbox(
+                "", [real_labels[k] for k in available],
+                label_visibility="collapsed", key="real_choice"
+            )
+            real_key = available[[real_labels[k] for k in available].index(real_choice)]
+            row = REAL_EXAMPLES[real_key]
+
+            actual = "Pernah churn" if row['_target'] == 1 else "Aktif bertahan"
+            actual_color = "#94a3b8"
+
+            st.markdown(f"""
+            <div class="gcard" style="margin-top:.5rem">
+                <div style="font-size:.68rem;color:#64748b;margin-bottom:.6rem;
+                            display:flex;justify-content:space-between">
+                    <span>Status historis: <b style="color:{actual_color}">{actual}</b></span>
+                    <span>Skor model: <b style="color:#f1f5f9">{row['_proba']:.0%}</b></span>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem">
+                    <div class="sig-row"><span class="sig-name">🏢 Tenure</span><span class="sig-val">{int(row['tenure_days'])} hari</span></div>
+                    <div class="sig-row"><span class="sig-name">💰 MRR</span><span class="sig-val">{fmt_idr(row['total_mrr'] * KURS)}</span></div>
+                    <div class="sig-row"><span class="sig-name">📱 Last login</span><span class="sig-val">{int(row['days_since_last_usage'])} hari lalu</span></div>
+                    <div class="sig-row"><span class="sig-name">🔧 Fitur dipakai</span><span class="sig-val">{int(row['unique_features_used'])}/40</span></div>
+                    <div class="sig-row"><span class="sig-name">⭐ Satisfaction</span><span class="sig-val">{row['avg_satisfaction_score']:.1f}/5</span></div>
+                    <div class="sig-row"><span class="sig-name">🎧 Tiket</span><span class="sig-val">{int(row['total_tickets'])}</span></div>
+                    <div class="sig-row"><span class="sig-name">🚨 Escalation</span><span class="sig-val">{row['escalation_rate']:.0%}</span></div>
+                    <div class="sig-row"><span class="sig-name">📊 Plan movement</span><span class="sig-val">{int(row['net_plan_movement']):+d}</span></div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            real_btn = st.button("🔍 Prediksi Profil Ini", use_container_width=True, key="real_predict_btn")
+
+            if real_btn:
+                st.session_state.selected_real_row = row
+                st.session_state.input_mode = "real"
+                predict_btn = True
 
 
 # ============================================================
@@ -612,73 +617,97 @@ with col_right:
     st.markdown('<div class="slabel">📈 Hasil Analisis Risiko</div>', unsafe_allow_html=True)
 
     if predict_btn:
-        _ss = st.session_state.selected_sample
-        
-        # Gunakan 0 sebagai default, bukan mean dataset
-        base = {col: 0 for col in FEATURES}
-        
-        base.update({
-            "tenure_days"            : tenure_days,
-            "total_mrr"              : total_mrr,
-            "avg_mrr"                : total_mrr,
-            "total_arr"              : total_mrr * 12,
-            "days_since_last_usage"  : days_since_last_usage,
-            "unique_features_used"   : unique_features_used,
-            "feature_breadth_ratio"  : unique_features_used / 40,
-            "avg_satisfaction_score" : avg_satisfaction_score,
-            "min_satisfaction_score" : avg_satisfaction_score,
-            "total_tickets"          : total_tickets,
-            "escalation_rate"        : escalation_rate,
-            "num_escalated"          : int(escalation_rate * max(total_tickets,1)),
-            "sub_churn_ratio"        : sub_churn_ratio,
-            "net_plan_movement"      : net_plan_movement,
-            "seats"                  : seats,
-            "pct_urgent"             : pct_urgent,
-            "usage_density"          : usage_density,
-            "error_rate"             : _ss.get("error_rate", escalation_rate * 0.5),
-            "avg_error_count"        : _ss.get("avg_error_count", escalation_rate * 0.5),
-            "avg_first_response_mins": _ss.get("avg_first_response_mins", 180.0 if escalation_rate > 0.5 else 30.0),
-            "pct_annual_billing"     : _ss.get("pct_annual_billing", 0.9 if net_plan_movement > 0 else 0.3),
-            "ever_downgraded"        : _ss.get("ever_downgraded", 1 if net_plan_movement < 0 else 0),
-            "has_low_satisfaction"   : _ss.get("has_low_satisfaction", 1 if avg_satisfaction_score < 2.5 else 0),
-            "churn_event_count"      : _ss.get("churn_event_count", 0),
-            "total_refund_usd"       : 0,
-            "days_since_last_churn"  : 0,
-            "max_mrr"                  : total_mrr,
-            "subscription_duration_avg": tenure_days * 0.8,
-            "avg_usage_duration_secs"  : usage_density * 300,
-            "total_usage_events"       : usage_density * 30,
-            "total_usage_count"        : usage_density * 30,
-            "usage_days"               : min(30, int(tenure_days * 0.7)),
-            "total_usage_duration_secs": usage_density * 300 * 30,
-            "avg_usage_count"          : usage_density,
-            "total_subscriptions"      : 1,
-            "active_subscriptions"     : 1,
-            "churned_subscriptions"    : int(sub_churn_ratio),
-            "num_upgrades"             : max(0, net_plan_movement),
-            "num_downgrades"           : max(0, -net_plan_movement),
-            "num_trials"               : 0,
-            "has_auto_renew"           : 1,
-            "net_plan_movement"        : net_plan_movement,
-            "beta_feature_usage_count" : 0,
-            "total_tickets"            : total_tickets,
-            "num_urgent_tickets"       : int(pct_urgent * total_tickets),
-            "num_high_tickets"         : int(pct_urgent * total_tickets * 0.5),
-            "critical_ticket_count"    : int(pct_urgent * total_tickets),
-            "min_satisfaction_score"   : avg_satisfaction_score - 0.5,
-            "max_resolution_hours"     : 48.0 if escalation_rate > 0.3 else 8.0,
-            "avg_resolution_hours"     : 24.0 if escalation_rate > 0.3 else 4.0,
-            # One-hot defaults — set industry_DevTools sebagai default
-            "industry_DevTools"        : 1,
-            "referral_source_organic"  : 1,
-            "recency_bucket_encoded"   : 1 if days_since_last_usage <= 7 else 2 if days_since_last_usage <= 30 else 3,
-            "latest_plan_tier_encoded" : 1 if net_plan_movement >= 0 else 0,
-            "seats_bucket_encoded"     : 0 if seats <= 5 else 1 if seats <= 20 else 2 if seats <= 50 else 3,
-            "tenure_bucket_encoded"    : 0 if tenure_days <= 90 else 1 if tenure_days <= 180 else 2 if tenure_days <= 365 else 3,
-                })
-       
+        if st.session_state.input_mode == "real":
+            # ── Mode Data Real: pakai vektor 83 fitur ASLI, tidak direkonstruksi ──
+            row  = st.session_state.selected_real_row
+            X_in = pd.DataFrame([row[FEATURES]])
 
-        X_in = pd.DataFrame([base]).reindex(columns=FEATURES, fill_value=0)
+            # Variabel display diambil langsung dari baris asli
+            tenure_days             = int(row['tenure_days'])
+            total_mrr                = float(row['total_mrr'])
+            days_since_last_usage    = int(row['days_since_last_usage'])
+            unique_features_used     = int(row['unique_features_used'])
+            avg_satisfaction_score   = float(row['avg_satisfaction_score'])
+            total_tickets            = int(row['total_tickets'])
+            escalation_rate          = float(row['escalation_rate'])
+            sub_churn_ratio          = float(row['sub_churn_ratio'])
+            net_plan_movement        = int(row['net_plan_movement'])
+
+            ground_truth_note = (
+                f'<div style="font-size:.68rem;color:#64748b;margin-bottom:.7rem;text-align:center">'
+                f'📌 Status historis pelanggan ini: '
+                f'<b style="color:#94a3b8">{"pernah churn" if row["_target"]==1 else "aktif bertahan"}</b>'
+                f'</div>'
+            )
+        else:
+            _ss = st.session_state.selected_sample
+            ground_truth_note = ""
+
+            # Gunakan 0 sebagai default, bukan mean dataset
+            base = {col: 0 for col in FEATURES}
+
+            base.update({
+                "tenure_days"            : tenure_days,
+                "total_mrr"              : total_mrr,
+                "avg_mrr"                : total_mrr,
+                "total_arr"              : total_mrr * 12,
+                "days_since_last_usage"  : days_since_last_usage,
+                "unique_features_used"   : unique_features_used,
+                "feature_breadth_ratio"  : unique_features_used / 40,
+                "avg_satisfaction_score" : avg_satisfaction_score,
+                "min_satisfaction_score" : avg_satisfaction_score,
+                "total_tickets"          : total_tickets,
+                "escalation_rate"        : escalation_rate,
+                "num_escalated"          : int(escalation_rate * max(total_tickets,1)),
+                "sub_churn_ratio"        : sub_churn_ratio,
+                "net_plan_movement"      : net_plan_movement,
+                "seats"                  : seats,
+                "pct_urgent"             : pct_urgent,
+                "usage_density"          : usage_density,
+                "error_rate"             : _ss.get("error_rate", escalation_rate * 0.5),
+                "avg_error_count"        : _ss.get("avg_error_count", escalation_rate * 0.5),
+                "avg_first_response_mins": _ss.get("avg_first_response_mins", 180.0 if escalation_rate > 0.5 else 30.0),
+                "pct_annual_billing"     : _ss.get("pct_annual_billing", 0.9 if net_plan_movement > 0 else 0.3),
+                "ever_downgraded"        : _ss.get("ever_downgraded", 1 if net_plan_movement < 0 else 0),
+                "has_low_satisfaction"   : _ss.get("has_low_satisfaction", 1 if avg_satisfaction_score < 2.5 else 0),
+                "churn_event_count"      : _ss.get("churn_event_count", 0),
+                "total_refund_usd"       : 0,
+                "days_since_last_churn"  : 0,
+                "max_mrr"                  : total_mrr,
+                "subscription_duration_avg": tenure_days * 0.8,
+                "avg_usage_duration_secs"  : usage_density * 300,
+                "total_usage_events"       : usage_density * 30,
+                "total_usage_count"        : usage_density * 30,
+                "usage_days"               : min(30, int(tenure_days * 0.7)),
+                "total_usage_duration_secs": usage_density * 300 * 30,
+                "avg_usage_count"          : usage_density,
+                "total_subscriptions"      : 1,
+                "active_subscriptions"     : 1,
+                "churned_subscriptions"    : int(sub_churn_ratio),
+                "num_upgrades"             : max(0, net_plan_movement),
+                "num_downgrades"           : max(0, -net_plan_movement),
+                "num_trials"               : 0,
+                "has_auto_renew"           : 1,
+                "net_plan_movement"        : net_plan_movement,
+                "beta_feature_usage_count" : 0,
+                "total_tickets"            : total_tickets,
+                "num_urgent_tickets"       : int(pct_urgent * total_tickets),
+                "num_high_tickets"         : int(pct_urgent * total_tickets * 0.5),
+                "critical_ticket_count"    : int(pct_urgent * total_tickets),
+                "min_satisfaction_score"   : avg_satisfaction_score - 0.5,
+                "max_resolution_hours"     : 48.0 if escalation_rate > 0.3 else 8.0,
+                "avg_resolution_hours"     : 24.0 if escalation_rate > 0.3 else 4.0,
+                # One-hot defaults — set industry_DevTools sebagai default
+                "industry_DevTools"        : 1,
+                "referral_source_organic"  : 1,
+                "recency_bucket_encoded"   : 1 if days_since_last_usage <= 7 else 2 if days_since_last_usage <= 30 else 3,
+                "latest_plan_tier_encoded" : 1 if net_plan_movement >= 0 else 0,
+                "seats_bucket_encoded"     : 0 if seats <= 5 else 1 if seats <= 20 else 2 if seats <= 50 else 3,
+                "tenure_bucket_encoded"    : 0 if tenure_days <= 90 else 1 if tenure_days <= 180 else 2 if tenure_days <= 365 else 3,
+            })
+
+            X_in = pd.DataFrame([base]).reindex(columns=FEATURES, fill_value=0)
+
         bc   = X_in.select_dtypes(include='bool').columns
         X_in[bc] = X_in[bc].astype(int)
 
@@ -688,6 +717,7 @@ with col_right:
         predicted = prob >= THRESHOLD
 
         st.markdown(f"""
+        {ground_truth_note}
         <div class="{css_class}">
             <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;
                         color:{risk_color};margin-bottom:.4rem">{biz_icon} {risk_label}</div>
