@@ -444,8 +444,8 @@ st.markdown(f"""
     <div class="bcard">
         <div class="bcard-icon">🎯</div>
         <div class="bcard-label">Model</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;color:#a5b4fc">XGBoost Optimized</div>
-        <div class="bcard-sub">RandomizedSearchCV · 50 iterasi</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;color:#a5b4fc">{meta.get('model', 'Random Forest')}</div>
+        <div class="bcard-sub">{meta.get('params',{}).get('n_estimators','')} trees · max_depth={meta.get('params',{}).get('max_depth','')}</div>
     </div>
     <div class="bcard">
         <div class="bcard-icon">📡</div>
