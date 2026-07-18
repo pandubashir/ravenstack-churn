@@ -77,6 +77,46 @@ Alternatif model (XGBoost Optimized) juga tersedia di `models/` untuk perbanding
 
 ---
 
+## ⚠️ Keterbatasan Model & Dataset
+
+Bagian ini sengaja ditulis eksplisit karena kejujuran soal keterbatasan model
+adalah bagian dari proses evaluasi yang benar, bukan kegagalan proyek.
+
+### 1. Sinyal fitur terhadap target churn tergolong lemah
+Korelasi Pearson tertinggi di antara **seluruh 83 fitur** terhadap target
+churn hanya ~0.12 (`days_since_last_usage`). Fitur bisnis intuitif seperti
+`avg_satisfaction_score` (r≈0.008) dan `escalation_rate` (r≈0.06) nyaris tidak
+berkorelasi dengan churn di dataset ini. Beberapa bahkan berlawanan arah
+dengan intuisi bisnis umum (mis. `error_rate` berkorelasi negatif dengan churn).
+
+Praktis: **belum diverifikasi** apakah ini karena ukuran sampel (500 akun)
+terlalu kecil, atau karena mekanisme generator sintetis menetapkan `churn_flag`
+secara sebagian besar independen dari fitur usage/satisfaction/subscription.
+Kandidat langkah lanjutan: generate ulang dataset dengan N lebih besar dan
+membandingkan ulang kekuatan korelasinya.
+
+### 2. Skor probabilitas tidak dikalibrasi secara agresif ke ekstrem
+Pada test set (data yang tidak dilihat model saat training), probabilitas
+prediksi berkisar **0.17–0.54** — model jarang sekali sangat yakin (mendekati
+0% atau 100%) untuk data baru, meski pada data training rentangnya jauh lebih
+lebar (0.10–0.79). Ini indikasi model masih agak konservatif/underconfident
+saat generalisasi ke data baru, konsisten dengan sinyal fitur yang lemah di atas.
+
+### 3. MRR **tidak** dijadikan pengali risiko oleh model
+Kartu "Business Impact" (estimasi kerugian MRR/ARR) dihitung **setelah** dan
+**terpisah** dari skor probabilitas churn — murni untuk membantu tim CS
+memprioritaskan akun mana yang ditangani lebih dulu berdasarkan besar
+kerugian potensial, bukan bagian dari perhitungan model itu sendiri. Bahkan,
+korelasi `total_mrr` terhadap churn di dataset ini justru lemah dan negatif
+(r≈-0.04), sehingga MRR besar tidak secara otomatis menaikkan skor risiko.
+
+Kalau ada penjelasan naratif seperti "pelanggan besar sedang mengevaluasi
+kompetitor" di sekitar suatu skor, itu adalah **interpretasi bisnis** untuk
+membantu tim CS membaca angka — bukan logika internal model, karena
+Random Forest tidak bernalar secara semantik seperti itu.
+
+---
+
 ## 🚀 Menjalankan Secara Lokal
 
 ```bash
